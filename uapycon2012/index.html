@@ -1,0 +1,849 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Functional Programming with Python</title>
+
+		<meta name="description" content="PyCon UA 2012: Functional Programming with Python">
+		<meta name="author" content="Alexey Kachayev">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	
+	<body>
+		
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Functional Programming with Python</h1>
+					<h3>by Alexey Kachayev, 2012</h3>
+				</section>
+
+				<section>
+					<h2>About me</h2>
+					<br/>
+					<ul>
+						<li>Position: CTO at Kitapps Inc.</li>
+						<li>Production experience: Python, Java, JS, Go, Scala, Clojure, Erlang</li>
+						<li>Looked at: Haskell, Lisp, Scheme</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Goals</h2>
+					<br/>
+					<ul>
+						<li>Short functional paradigm presentation</li>
+						<li>Dispel popular myths about FP</li>
+						<li>Characterize Python & FP relations</li>
+						<li><s>Why should I care?</s> How can I make my code better?</li>
+					</ul>
+					
+					<h3 style="margin-top: 60px">More <b style="color:  #FA5858">How</b>, less <b style="color: #FA5858">Why</b></h3>
+				</section>
+
+				<section>
+					<h2>About functional</h2>
+					<br />
+					<ul>
+						<li>Imperative programming (С/C++, Java)</li>
+						<li>Declarative programming
+							<ul>
+								<li><span style="color:  #FA5858">Functional programming</span> (Haskell, Scheme, OCaml)</li>
+								<li>Logic programming (Prolog, Clojure core.logic)</li>
+							</ul>
+						</li>
+					</ul>
+					<br /><br /><br />
+					<ul>
+						<li>IP = computation in terms of statements that change a program state</li>
+						<li>FP = computation as the evaluation of mathematical functions and avoids state and mutable data</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>About functional</h2>
+					<br />
+					<ul>
+						<li>Avoid state</li>
+						<li>Immutable data</li>
+						<li>First-class functions</li>
+						<li>Higher-order functions</li>
+						<li>Pure functions</li>
+						<li>Recursion, tail recursion</li>
+						<li>Iterators, sequences, lazy evaluation, pattern matching, monads....</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>About functional</h2>
+					<br />
+					<h3>"Imperative terminal"</h3>
+					<pre><code contenteditable>$ ./program1
+$ ./program2 --param1=1
+$ ./program3</code></pre>
+					<br />
+					<h3>"Functional terminal"</h3>
+					<pre><code contenteditable class="bash">$ ./program1 | ./program2 --param1=1 | ./program3</code></pre>
+				</section>
+
+				<section>
+					<h2>Programming task</h2>
+					<br /><br />
+					<p>
+						Calculate partially invalid string with operations: "28+32+++32++39"
+					</p>
+				</section>
+
+				<section>
+					<h2>Programming task</h2>
+					<br />
+					<p>
+						Imperative style = actions that change state from initial state to result
+					</p>
+					<pre><code contenteditable class="python">expr, res = "28+32+++32++39", 0
+for t in expr.split("+"):
+    if t != "":
+        res += int(t)
+
+print res</code></pre>
+					<pre><code contenteditable class="python">"28+32+++32++39", 0
+"28", 0
+"32", 28
+"", 60
+"", 60
+"32", 60
+"", 92
+"39", 92
+131</code></pre>
+				</section>
+
+				<section>
+					<h2>Programming task</h2>
+					<br />
+					<p>
+						Functional style = apply transformation (and compositions)
+					</p>
+					<pre><code contenteditable class="python">from operator import add
+expr = "28+32+++32++39"
+print reduce(add, map(int, filter(bool, expr.split("+"))))</code></pre>
+					<br />
+					<pre><code contenteditable class="python">"28+32+++32++39"
+["28","32","","","32","","39"]
+["28","32","32","39"]
+[28,32,32,39]
+131</code></pre>
+				</section>
+
+				<section>
+					<h2>map/reduce/filter</h2>
+					<br /><br />
+					<ul>
+						<li>Readability VS. conciseness</li>
+						<li>Technical aspects VS. operation substance</li>
+						<li>Code reusage ("pluggability")</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Python hints</h2>
+					<br />
+					<h3>Module "operator"</h3>
+
+<pre><code contenteditable class="python">>>> operator.add(1,2)
+3
+>>> operator.mul(3,10)
+30
+>>> operator.pow(2,3)
+8
+>>> operator.itemgetter(1)([1,2,3])
+2</code></pre>
+						
+				</section>
+
+				<section>
+					<h2>Python hints</h2>
+					<br />
+					<h3>Module "itertools"</h3>
+<pre><code contenteditable class="python">>>> list(itertools.chain([1,2,3], [10,20,30]))
+[1, 2, 3, 10, 20, 30]
+>>> list(itertools.chain(*(map(xrange, range(5)))))
+[0, 0, 1, 0, 1, 2, 0, 1, 2, 3]
+>>> list(itertools.starmap(lambda k,v: "%s => %s" % (k,v), 
+...                        {"a": 1, "b": 2}.items()))
+['a => 1', 'b => 2']
+>>> list(itertools.imap(pow, (2,3,10), (5,2,3)))
+[32, 9, 1000]
+>>> dict(itertools.izip("ABCD", [1,2,3,4]))
+{'A': 1, 'C': 3, 'B': 2, 'D': 4}</code></pre>
+				</section>
+
+				<section>
+					<h2>Can we avoid loops?</h2>
+<br />
+<pre><code contenteditable class="python">>>> name = None
+>>> while name is None:
+...    name = raw_input()
+...    if len(name) < 2:
+...        name = None</code></pre>
+
+<h3>Recursion</h3>
+
+<pre><code contenteditable class="python">def get_name():
+    name = raw_input()
+    return name if len(name) >= 2 else get_name()</code></pre>
+	</section>
+  
+	<section>
+		<h2>Tail recursion?</h2>
+
+<br />
+<h3>Erlang</h3>
+<pre><code contenteditable class="erlang">fib(N) -> fib(0,1,N).
+fib(_,S,1) -> S;
+fib(F,S,N) -> fib(S,F+S,N-1).</code></pre>
+
+<br />
+<h3>Python</h3>
+<p style="font-size: large">sorry...</p>
+				</section>
+
+				<section>
+					<h2>Functions</h2>
+					<br />
+					<h3>First-class</h3>
+					<pre><code contenteditable class="python">def add(a, b):
+    return a + b</code></pre>
+					<br />
+					<pre><code contenteditable class="python">add = lambda a,b: a + b</code></pre>
+					<br />
+					<pre><code contenteditable class="python">def calculations(a, b):
+    def add():
+        return a + b
+
+    return a, b, add</code></pre>
+				</section>
+
+				<section>
+					<h3>Functions</h3>
+					<br />
+					<h3>High-ordered function</h3>
+					<p>Pass function as argument</p>
+					<br />
+					<pre><code contenteditable class="python">map(lambda x: x^2, [1,2,3,4,5])</code></pre>
+				</section>
+
+				<section>
+					<h3>Functions</h3>
+					<br />
+					<h3>High-ordered function</h3>
+					<p>Function returns function as result</p>
+						
+					<pre><code contenteditable class="python">def speak(topic):
+    print "My speach is " + topic
+
+def timer(fn):
+    def inner(*args, **kwargs):
+        t = time()
+        fn(*args, **kwargs)
+        print "took {time}".format(time=time()-t)
+
+    return inner
+
+speaker = timer(speak)
+speaker("FP with Python")</code></pre>
+				</section>
+						
+				<section>
+					<h3>Functions</h3>
+					<br />
+					<h3>High-ordered function</h3>
+					<p>I've already saw this...</p>
+
+					<pre><code contenteditable class="python">@timer
+def speak(topic):
+    print "My speach is " + topic
+    
+speak("FP with Python")</code></pre>
+				</section>
+
+				<section>
+					<h1>Functions</h1>
+					<br /><br />
+					<h3>
+						How to write good code <br />dealing with <span style="color:  #FA5858">functions</span>?
+					</h3>
+				</section>
+
+				<section>
+					<h2>Partial function application</h2>
+					<blockquote>
+						The process of fixing a number of arguments to a function, producing another function of smaller arity
+					</blockquote>
+					
+					<br />
+					<br />
+					<h3>Simply-typed lambda calculus:</h3>
+					<pre>papply : (((a × b) → c) × a) → (b → c) = λ(f, x). λy. f (x, y)</pre>
+					<p>Oh, never mind...</p>
+				</section>
+					
+				<section>
+					<h2>Partial function application</h2>
+					<br /><br />
+					<pre><code contenteditable class="python">def log(level, message):
+    print "[{level}]: {msg}".format(level=level, msg=message)					
+
+log("debug", "Start doing something")
+log("debug", "Continue with something else")
+log("debug", "Finished. Profit?")
+
+def debug(message):
+    log("debug", message)</code></pre>
+				</section>
+
+				<section>
+					<h2>Partial function application</h2>
+					<br />
+					<p>
+						Simplify...
+					</p>
+						
+					<pre><code contenteditable class="python">def log(level, message):
+    print "[{level}]: {msg}".format(level=level, msg=message)					
+
+from functools import partial
+debug = partial(log, "debug")
+
+debug("Start doing something")
+debug("Continue with something else")
+debug("Finished. Profit?")</code></pre>						
+				</section>
+				
+				<section>
+					<h2>Currying</h2>
+					<blockquote>
+						The technique of transforming a function that takes multiple arguments in such a way that it can be called as a chain of functions each with a single argument
+					</blockquote>
+
+					<br />
+					<br />
+					<h3>Simply-typed lambda calculus:</h3>
+					<pre>curry: ((a × b) → c) → (a → (b → c)) = λf. λx. λy. f (x, y)</pre>
+					<p>Oh, never mind...</p>
+				</section>
+
+				<section>
+					<h2>Currying</h2>
+					<br /><br />
+					<p>Segment sum</p>
+					<pre><code contenteditable class="python">def simple_sum(a, b):
+    return sum(range(a, b+1))
+
+>>> simple_sum(1, 10)
+55</code></pre>	
+	</section>
+
+				<section>
+					<h2>Currying</h2>
+					<br /><br />
+					<p>Squares</p>
+					
+					<pre><code contenteditable class="python">def square_sum(a, b):
+    return sum(map(lambda x: x**2, range(a,b+1)))
+
+>>> square_sum(1,10)
+385</code></pre>	
+	</section>
+
+				<section>
+					<h2>Currying</h2>
+					<br /><br />
+					<p>Logarithms</p>
+					
+					<pre><code contenteditable class="python">def log_sum(a, b):
+    return sum(map(math.log, range(a,b+1)))
+
+>>> log_sum(1,10)
+15.104412573075518</code></pre>	
+
+	</section>
+
+				<section>
+					<h2>Currying</h2>
+					<br />
+					<p>In general...</p>
+					
+					<pre><code contenteditable class="python">def fsum(f):
+    def apply(a, b):
+        return sum(map(f, range(a,b+1)))
+    return apply
+
+log_sum = fsum(math.log)
+square_sum = fsum(lambda x: x**2)
+simple_sum = fsum(int) ## fsum(lambda x: x)</code></pre>	
+
+<br />
+<pre><code contenteditable class="python">>>> fsum(lambda x: x*2)(1, 10)
+110
+>>> import functools
+>>> fsum(functools.partial(operator.mul, 2))(1, 10)
+110</code></pre>	
+
+				</section>
+
+				<section>
+					<h2>Currying (standard library)</h2>
+					<br />
+					<pre><code contenteditable class="python">>>> from operator import itemgetter
+>>> itemgetter(3)([1,2,3,4,5])
+4
+
+>>> from operator import attrgetter as attr
+>>> class Speaker(object):
+...     def __init__(self, name):
+...         self.name = "[name] " + name
+... 
+>>> alexey = Speaker("Alexey")
+>>> attr("name")(alexey)
+'[name] Alexey'</code></pre>
+</section>
+
+<section>
+	<h2>Currying (standard library)</h2>
+	<br />
+<pre><code contenteditable class="python">>>> from operator import methodcaller
+
+>>> methodcaller("__str__")([1,2,3,4,5])
+'[1, 2, 3, 4, 5]'
+>>> methodcaller("keys")(dict(name="Alexey", topic="FP"))
+['topic', 'name']
+
+>>> values_extractor = methodcaller("values")
+>>> values_extractor(dict(name="Alexey", topic="FP"))
+['FP', 'Alexey']
+
+>>> methodcaller("count", 1)([1,1,1,2,2]) 
+>>> # same as [1,1,1,2,2].count(1)
+3</code></pre>	
+				</section>
+
+				<section>
+					<h2>Good function is small function</h2>
+<br />
+<h3 style="color:  #FA5858">Bad</h3>
+<pre><code contenteditable class="python">>>> ss = ["UA", "PyCon", "2012"]
+>>> reduce(lambda acc, s: acc + len(s), ss, 0)
+11</code></pre>	
+<h3>Not bad...</h3>
+<pre><code contenteditable class="python">>>> ss = ["UA", "PyCon", "2012"]
+>>> reduce(lambda l,r: l+r, map(lambda s: len(s), ss))
+11</code></pre>	
+<h3 style="color: #40FF00">Good</h3>
+<pre><code contenteditable class="python">>>> ss = ["UA", "PyCon", "2012"]
+>>> reduce(operator.add, map(len, ss))
+11</code></pre>	
+				</section>
+
+				<section>
+					<h2>Python hints</h2>
+					<h3>types are callable</h3>
+<pre><code contenteditable class="python">>>> map(str, range(5))
+['0', '1', '2', '3', '4']</code></pre>					
+					
+					<br />
+					<h3>classes are callable</h3>
+<pre><code contenteditable class="python">>>> class Speaker(object):
+...     def __init__(self, name):
+...         self.name = name
+>>> map(Speaker, ["Alexey", "Andrey", "Vsevolod"])
+[<__main__.Speaker>, <__main__.Speaker>, <__main__.Speaker>]</code></pre>
+					
+					<br />
+					<h3>instance methods are callable</h3>
+<pre><code contenteditable class="python">>>> map([1,2,3,4,5].count, [1,2,3,10,11])
+[1, 1, 1, 0, 0]</code></pre>					
+
+				</section>
+
+				<section>
+					<h3>Functions</h3>
+					<br />
+					<h3>Pure</h3>
+					<pre><code contenteditable class="python">def is_interesting(topic):
+    return topic.contains("FP")</code></pre>
+					<h3>Not pure</h3>
+					<pre><code contenteditable class="python">def speak(topic):
+    print topic</code></pre>
+					<h3>Pure ??</h3>
+					<pre><code contenteditable class="python">def set_talk(speaker, topic):
+    speaker["talk"] = topic
+    return speaker</code></pre>
+				</section>
+
+				<section>
+					<h2>Mutable data</h2>
+					<br />
+					<h3>Global variable is evil</h3>
+					<p>and everybody knows why</p>
+<pre><code contenteditable class="python">current_speaker = {name: "Alexey Kachayev", talk: "FP with Python"}
+
+def ask_question(question):
+    print "{name}, I have question {question} about your {talk}"
+
+def quit(reason):
+    current_speaker = {name: "Andrey Svetlov"} # <-- this will fail
+    current_speaker["talk"] = "Oh, boring..." # <-- mutable state</code></pre>
+				</section>
+
+				<section>
+					<h2>Mutable data</h2>
+					<br />
+					<h3>And what about local?</h3>
+
+<pre><code contenteditable class="python">def run_conf():
+    speaker = {name: "Alexey Kachayev", talk: "FP with Python"}
+
+    def ask_question(question):
+        print "{name}, I have question {question} about {talk}"
+
+    def quit(reason):
+        current_speaker["talk"] = "Oh, boring..." # <- same
+
+    name = lambda: speaker["name"]</code></pre>
+
+				</section>
+
+				<section>
+					<h2>Purity is cool</h2>
+					<br /><br />
+					<ul>
+						<li>map can be pmap</li>
+						<li>Less bugs</li>
+						<li>Easier to test</li>
+						<li>More ways to reuse</li>
+					</ul>
+				</section>
+
+
+				<section>
+					<h2>Classes and OOP</h2>
+
+					<br />
+					<h3>Mutability...</h3>
+<pre><code contenteditable class="python">class Speaker(object):
+    def __init__(self, name, topic):
+        self.name = name
+        self.topic = topic
+
+    def ask(self, question):
+        print "{name}, {q}".format(name=self.name, q=question)
+
+    def talk(self):
+        print "I'm starting {topic}".format(topic=self.topic)
+
+me = Speaker("Alexey", "FP with Python")
+me.name = "Andrey" # <- WTF???
+
+# or ....
+
+me.set_name("Vsevolod") # <- guys, are you serious???</code></pre>
+			</section>
+
+			<section>
+				<h2>Think functional: Classes and OOP</h2>
+				<br />
+				<h3>Mutable dict + partial binding</h3>
+<pre><code contenteditable class="python">def ask(self, question):
+    print "{name}, {q}?".format(name=self["name"], q=question)
+
+def talk(self):
+    print "I'm starting {topic}".format(topic=self["topic"])
+
+from functools import partial
+def cls(**methods):
+    def bind(self):
+        return lambda (name, method): (name, partial(method, self))
+    return lambda **attrs: dict(
+        attrs.items() + map(bind(attrs.copy()), methods.items())
+    )
+
+Speaker = cls(ask=ask, talk=talk)
+</code></pre>
+			</section>
+
+			<section>
+				<h2>Think functional: Classes and OOP</h2>
+				<br />
+<pre><code contenteditable class="python">>>> me = Speaker(name="Alexey", topic="FP with Python")
+
+>>> me["name"]
+'Alexey'
+>>> me["topic"]
+'FP with Python'
+>>> me["talk"]
+&lt;functools.partial object at 0x109798d60&gt;
+>>> me["talk"]()
+I'm starting FP with Python
+>>> me["ask"]
+&lt;functools.partial object at 0x109798c58&gt;
+>>> me["ask"]("WTF")
+Alexey, WTF?</code></pre>
+<p>bindings are immutable</p>
+			</section>
+
+			<section>
+				<h2>Think functional: Classes and OOP</h2>
+				<br />
+				<h3>If you need mutable implementation...</h3>
+<pre><code contenteditable class="python">def cls(**methods):
+    def bind(**attrs):
+        attrs = attrs.copy()
+        attrs.update(dict(map(lambda (n,m): n, partial(m, attrs), 
+                              methods.items())))
+        return attrs
+    return bind
+
+</code></pre>
+			</section>
+
+				<section>
+					<h2>Stop writing classes</h2>
+					<br />
+					<ul>
+						<li>Jack Diederich</li>
+						<li>PyCon US 2012</li>
+						<li>https://www.youtube.com/watch?v=o9pEzgHorH0</li>
+					</ul>
+					<br /><br /><br />
+					<h3>Simplify your code, avoiding classes</h3>
+				</section>
+
+				<section>
+					<h2>Stop writing classes</h2>
+					<br />
+					<pre><code contenteditable class="python">class Greeting(object):
+    def __init__(self, greeting="hello"):
+        self.greeting = greeting
+
+    def greet(self, name):
+        return "{greet}! {name}".format(greet=self.greeting, name)
+
+hola = Greeting("hola")
+print hola.greet("bob")
+
+>>> "hola! bob"</code></pre>
+<br /><br />
+<h2 style="color: #FA5858">Are you kidding me???</h2>
+				</section>
+
+				<section>
+					<h2>Stop writing classes</h2>
+					<br />
+					<pre><code contenteditable class="python">def greet(greeting, target):
+    return "{greet}! {name}".format(greet=greeting, name)
+
+hola = functools.partial(greet, "hola")</code></pre>
+					
+					<br /><br />
+					<h2 style="color: #40FF00">Do not use classes as data store</h2>
+				</section>
+
+				<section>
+					<h2>Think functional: Data</h2>
+					<h3>Assume that we don't have dict</h3>
+
+<pre><code contenteditable class="python">def dct(*items):
+    def pair((key, value)):
+        return lambda k: value if k == key else None
+
+    def merge(l, r):
+        return lambda k: l(k) or r(k)
+
+    return reduce(merge, map(pair, items), pair(None, None))</code></pre>
+
+<br />
+<pre><code contenteditable class="python">>>> me = dct(("name", "Alexey"), ("topic", "FP with Python"))
+>>> me("name")
+'Alexey'
+>>> me("topic")
+'FP with Python'
+## use this for cls function
+>>> me("ask")("WTF")
+Alexey, WTF?
+</code></pre>
+	<p style="font-size: medium">Sure, I know about complexity...</p>
+				</section>
+
+				<section>
+					<h2>Python & FP</h2>
+					<br />
+					
+					<h3 style="color: #40FF00">Pro</h3>
+					
+					<ul>
+						<li>Functions as first-class citizens</li>
+						<li>lambda</li>
+						<li>Standard library: map/filter/reduce, itertools, operator</li>
+					</ul>
+				</section>
+					
+				<section>
+					<h2>Python & FP</h2>
+					<br />
+					
+					<h3 style="color:  #FA5858">Con</h3>
+					<ul>
+						<li>Impossible to separate pure / non-pure</li>
+						<li>Mutable variables</li>
+						<li>Costly mem copy operations</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Python & FP</h2>
+					<br />
+				
+					<h3 style="color:  #FA5858">Con</h3>
+					<ul>
+						<li>Imperative style for cycles</li>
+						<li>No optimization for tail recursion</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Python & FP</h2>
+					<br />
+				
+					<h3 style="color:  #FA5858">Con</h3>
+					<ul>
+						<li>No pattern matching syntax</li>
+						<li>Classes-based only type system</li>
+						<li>No functions overloading mechanism</li>
+						<li>Functions composition is not implemented in stdlib</li>
+						<li>Imperative errors handling based on exceptions</li>
+					</ul>
+				</section>
+
+				<section>
+				<h2>Python & FP</h2>
+				<h3 style="color:  #FA5858">Con</h3>
+<h3>Python</h3>
+<pre><code contenteditable class="python">map(lambda x: x*2, [1,2,3])
+</code></pre>				
+
+<h3>Scala</h3>
+<pre><code contenteditable class="scala">List(1,2,3).map(_*2)
+</code></pre>		
+
+<h3>Clojure</h3>
+<pre><code contenteditable class="clojure">(map #(%*2) '(1 2 3))
+</code></pre>				
+
+<h3>Haskell</h3>
+<pre><code contenteditable class="haskell">map (2*) [1,2,3]
+</code></pre>				
+				</section>
+
+				<section>
+					<h2>What did we miss?</h2>
+					<br />
+					<h3>
+						Almost <span style="color:  #FA5858">everything</span>
+					</h3>
+					<ul>
+						<li>Errors handling without exceptions</li>
+						<li>Pattern matching</li>
+						<li>Message passing</li>
+						<li>Functional data structures</li>
+						<li>Custom data types</li>
+						<li>Lazy evaluation</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Where can I find more?</h2>
+					<br />
+					<ul>
+						<li>SICP (http://deptinfo.unice.fr/~roy/sicp.pdf)</li>
+						<li>Book "Purely Functional Data Structures"</li>
+						<li>Book "The Functional Approach to Programming"</li>
+						<li>Coursera "Functional Programming Principles in Scala"</li>
+						<li>Real World Haskell (http://book.realworldhaskell.org/read/)</li>
+						<li>Learn You a Haskell for Great Good! (http://learnyouahaskell.com/)</li>
+						<li>Learn You Some Erlang for Great Good! (http://learnyousomeerlang.com/)</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>The end</h2>
+					<br />
+					<h3 style="color:  #FA5858">Thank you for attention!</h3>
+					<ul>
+						<li>Alexey Kachayev</li>
+						<li>Email: kachayev@gmail.com</li>
+						<li>Twitter: @kachayev</li>
+						<li>Github: kachayev</li>
+					</ul>
+					<br />
+					<br />
+					<h3 style="color: #40FF00">This presentation:</h3>
+					<p>https://github.com/kachayev/talks</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/zoom-js/zoom.js', condition: function() { return !!document.body.classList; } },
+					{ src: '/socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+					{ src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } }
+				]
+			});
+			
+		</script>
+
+	</body>
+</html>
