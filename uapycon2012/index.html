@@ -687,7 +687,7 @@ hola = functools.partial(greet, "hola")</code></pre>
     def merge(l, r):
         return lambda k: l(k) or r(k)
 
-    return reduce(merge, map(pair, items), pair(None, None))</code></pre>
+    return reduce(merge, map(pair, items), pair((None, None)))</code></pre>
 
 <br />
 <pre><code contenteditable class="python">>>> me = dct(("name", "Alexey"), ("topic", "FP with Python"))
