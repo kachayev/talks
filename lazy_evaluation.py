@@ -116,9 +116,13 @@ assert lead_to([fill(0), pour(0, 1)]) == (0, 4)
 assert lead_to([fill(0), empty(0), fill(1)]) == (0, 9)
 
 def started_at(path_sets, explored):
-    more =  lazy(path + [m] for path in path_sets for m in moves if lead_to(path + [m]) not in explored)    
+    more =  lazy(path + [m] for path in path_sets 
+                            for m in moves 
+                            if lead_to(path + [m]) not in explored)    
+
     for el in more: yield el
-    for el in started_at(more, explored.union(set(imap(lead_to, more)))): yield el
+    explored = explored.union(set(imap(lead_to, more)))
+    for el in started_at(more, explored): yield el
 
 ## lazy evaluated "list" with all possible 
 ## pathes from initial state to end one 
@@ -165,9 +169,13 @@ assert Path([fill(0), pour(0, 1)]).lead_to == (0, 4)
 assert Path([fill(0), empty(0), fill(1)]).lead_to == (0, 9)
 
 def started_at(path_sets, explored):
-    more =  lazy(path.extend(m) for path in path_sets for m in moves if path.extend(m).lead_to not in explored)    
+    more =  lazy(path.extend(m) for path in path_sets 
+                                for m in moves 
+                                if path.extend(m).lead_to not in explored)    
+
     for el in more: yield el
-    for el in started_at(more, explored.union(set(imap(attrgetter("lead_to"), more)))): yield el
+    explored = explored.union(set(imap(attrgetter("lead_to"), more)))
+    for el in started_at(more, explored): yield el
 
 ## lazy evaluated "list" with all possible 
 ## pathes from initial state to end one 
