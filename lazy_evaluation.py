@@ -21,7 +21,23 @@ from operator import attrgetter
 ## Utils and helper functions
 ############################################
 
+def named(fn):
+    """Wrap function with readable __name__ in order to simplify debug"""
+    def inner(*args, **kwargs):
+        wrapped = fn(*args, **kwargs)
+        args_repr = ", ".join(map(str, args))
+        wrapped.__name__ = "{fn}({args})".format(fn = fn.__name__, args=args_repr)
+        return wrapped
+    return inner
+
 def update(container, *pairs):
+    """Create copy of given container, chagning one (or more) elements.
+    
+    Creating of new list is necessary here, cause we don't want to
+    deal with mutable data structure in current situation - it will
+    be too problematic to keep everything working with many map/reduce
+    operations if data will be mutable.
+    """ 
     def pair(left, (pos, el)):
         return [(s if i != pos else el) for i, s in enumerate(left)]
     return reduce(pair, pairs, container)
@@ -53,24 +69,23 @@ glasses  = range(len(capacity))
 
 ## description of all possible moves
 
+@named
 def empty(glass):
     def inner(state):
         return update(state, (glass, 0))
-    inner.__name__ = "empty({g})".format(g=glass)
     return inner 
 
+@named
 def fill(glass):
     def inner(state):
         return update(state, (glass, capacity[glass]))
-    inner.__name__ = "fill({g})".format(g=glass)
     return inner
     
+@named
 def pour(from_, to):
     def inner(state):
         amount = min(state[from_], capacity[to]-state[to])
         return update(state, (from_, state[from_]-amount), (to, state[to]+amount))
-    # debug purpose only
-    inner.__name__ = "pour({f}, {t})".format(f=from_, t=to)
     return inner
 
 def moves():
