@@ -1,0 +1,292 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Functional Programming with Python</title>
+
+		<meta name="description" content="PyCon UA 2012: Functional Programming with Python">
+		<meta name="author" content="Alexey Kachayev">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+	
+	<body>
+		
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Lazy evaluation and declarative approach in Python</h1>
+					<h3>by Alexey Kachayev, 2012</h3>
+				</section>
+
+				<section>
+					<h2>About me</h2>
+					<br/>
+					<ul>
+						<li>Position: CTO at Kitapps Inc.</li>
+						<li>Production experience: Python, Erlang, Go, Scala, Clojure, Java, JS</li>
+						<li>Looked at: Haskell, Lisp, Scheme</li>
+					</ul>
+				</section>
+
+        <!-- goals of this talk -->
+				<section>
+					<h2>Goals</h2>
+					<br/>
+					<ul>
+            <li>Short functional paradigm presentation</li>
+<!-- other point of view
+lazy seq to operation with data
+some info how iterators/generators work  -->
+					</ul>
+					
+					<h3 style="margin-top: 60px">More <b style="color:  #FA5858">How</b>, less <b style="color: #FA5858">Why</b></h3>
+				</section>
+
+        <!-- Declarative/imperative approach -->
+				<section>
+					<h2>About declarative programming</h2>
+					<br />
+					<ul>
+						<li>Imperative programming (С/C++, Java)</li>
+						<li>Declarative programming
+							<ul>
+								<li><span style="color:  #FA5858">Functional programming</span> (Haskell, Scheme, OCaml)</li>
+								<li>Logic programming (Prolog, Clojure core.logic)</li>
+							</ul>
+						</li>
+					</ul>
+					<br /><br /><br />
+					<ul>
+						<li>IP = computation in terms of statements that change a program state</li>
+						<li>FP = computation as the evaluation of mathematical functions and avoids state and mutable data</li>
+					</ul>
+				</section>
+
+        <!-- Declarative/imperative approach: code samples with product calculation -->
+				<section>
+					<h2>Programming task</h2>
+					<br /><br />
+					<p>
+						Calculate partially invalid string with operations: "28*32***32**39"
+					</p>
+				</section>
+
+				<section>
+					<h2>Programming task</h2>
+					<br />
+					<p>
+						Imperative style = actions that change state from initial state to result
+					</p>
+					<pre><code contenteditable class="python">expr, res = "28*32***32**39", 0
+for t in expr.split("*"):
+    if t != "":
+        res *= int(t)
+
+print res</code></pre>
+          <!-- <pre><code contenteditable class="python">"28*32***32**39", 0
+"28", 0
+"32", 28
+"", 60
+"", 60
+"32", 60
+"", 92
+"39", 92
+131</code></pre> -->
+				</section>
+
+				<section>
+					<h2>Programming task</h2>
+					<br />
+					<p>
+						Functional style = apply transformation (and compositions)
+					</p>
+					<pre><code contenteditable class="python">from operator import mul
+expr = "28*32***32**39"
+print reduce(mul, map(int, filter(bool, expr.split("*"))))</code></pre>
+					<br />
+          <!-- <pre><code contenteditable class="python">"28*32***32**39"
+["28","32","","","32","","39"]
+["28","32","32","39"]
+[28,32,32,39]
+131</code></pre> -->
+				</section>
+
+        <!-- Lazy evaluation: from wikipedia -->
+				<section>
+					<h2>Functional is about...</h2>
+					<br />
+					<ul>
+						<li>Avoid state</li>
+						<li><b>Immutable data</b></li>
+						<li>First-class, higher-order functions</li>
+						<li>Purity</li>
+						<li>Recursion, tail recursion</li>
+						<li><b>Iterators, sequences</b></li>
+						<li><b>Lazy evaluation</b></li>
+						<li>Pattern matching, monads....</li>
+					</ul>
+				</section>
+
+        <!-- Lazy evaluation: from wikipedia -->
+<!-- In programming language theory, lazy evaluation or call-by-need[1] is an evaluation strategy which delays the evaluation of an expression until its value is needed (non-strict evaluation) and which also avoids repeated evaluations (sharing) -->
+<!-- The benefits of lazy evaluation include:
+Performance increases by avoiding needless calculations, and error conditions in evaluating compound expressions
+The ability to construct potentially infinite data structures
+The ability to define control flow (structures) as abstractions instead of primitives -->
+
+        <!-- Lazy evaluation: fibonacci in Haskell -->
+<!-- fibs = 0 : 1 : zipWith (+) fibs (tail fibs) -->
+
+        <!-- Lazy evaluation: fibonacci in Clojure -->
+<!-- user> (def fib (lazy-cat [0 1] (map + fib (rest fib)))) -->
+<!-- user> (take 10 fib)
+(0 1 1 2 3 5 8 13 21 34) -->
+
+        <!-- Lazy evaluation: fibonacci in Scala -->
+<!-- def fib: Stream[Int] = 0 #:: 1 #:: fib.zip(fib.tail).map{case (a,b) => a + b} -->
+
+        <!-- Lazy evaluation: fibonacci in Python  -->
+<!-- Imperative, as you can see -->
+<!-- def fib():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a+b -->
+
+        <!-- task description -->
+<!-- "Pouring water problem"
+Given two (or more) vessels, one of which can accommodate `a` liters of water and the other which can accommodate `b` liters of water, determine the number of steps required to obtain exactly `c` liters of water in one of the vessels.
+
+At the beginning both vessels are empty. The following operations are counted as "steps":
+* emptying a vessel
+* filling a vessel
+* pouring water from one vessel to the other, without spilling, until one of the vessels is either full or empty. -->
+
+        <!-- general approach how to solve it with BFS -->
+<!-- * initial state (all glasses are empty)
+* build all states by 1 step
+* recursively repeat until 
+  a) all states are mentioned
+  or
+  b) necessary is found  -->
+
+        <!-- CODE/ -->
+        <!-- declare initial state -->
+        <!-- declare possible moves and "list" of all possible moves -->
+        <!-- immutable operations on lists and why immutability matters -->
+        <!-- class Lazy to deal with lack of "stream" support on language level -->
+        <!-- lead_to, folding, test for previous code -->
+        <!-- started_at stream, solution declaration -->
+        <!-- debugging and printing result -->
+        <!-- class representation for Path -->
+        <!-- /CODE -->
+
+        <!-- what's for Python 2.*? -->
+<!-- itertools.imap instead of map
+itertools.ifilter instead of filter
+reduce instead of functools.reduce
+def pair(left, (pos, el)) is possible
+for .. in ..: yield .. instead of yield from -->
+
+        <!-- pros/cons -->
+<!-- Pros: 
+* readability
+* parallel execution (in theory)
+
+Cons:
+* immutability doesn't supported -->
+        
+        <!-- contacts, link to presentation -->
+				<section>
+					<h2>The end</h2>
+					<br />
+					<h3 style="color:  #FA5858">Thank you for attention!</h3>
+					<ul>
+						<li>Alexey Kachayev</li>
+						<li>Email: kachayev@gmail.com</li>
+						<li>Twitter: @kachayev</li>
+						<li>Github: kachayev</li>
+					</ul>
+					<br />
+					<br />
+					<h3 style="color: #40FF00">This presentation:</h3>
+					<p>https://github.com/kachayev/talks/kharkivpy#6</p>
+				</section>
+        
+				<section>
+				<h2>Python & FP</h2>
+				<h3 style="color:  #FA5858">Con</h3>
+<h3>Python</h3>
+<pre><code contenteditable class="python">map(lambda x: x*2, [1,2,3])
+</code></pre>				
+
+<h3>Scala</h3>
+<pre><code contenteditable class="scala">List(1,2,3).map(_*2)
+</code></pre>		
+
+<h3>Clojure</h3>
+<pre><code contenteditable class="clojure">(map #(* % 2) '(1 2 3))
+</code></pre>				
+
+<h3>Haskell</h3>
+<pre><code contenteditable class="haskell">map (2*) [1,2,3]
+</code></pre>				
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+			
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/highlight.js', async: true, callback: function() { window.hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'lib/js/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/js/data-markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/zoom-js/zoom.js', condition: function() { return !!document.body.classList; } },
+					{ src: '/socket.io/socket.io.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } },
+					{ src: 'plugin/speakernotes/client.js', async: true, condition: function() { return window.location.host === 'localhost:1947'; } }
+				]
+			});
+			
+		</script>
+
+	</body>
+</html>
