@@ -255,19 +255,37 @@ At the beginning both vessels are empty. The following operations are counted as
         <!-- /CODE -->
 
         <!-- what's for Python 2.*? -->
-<!-- itertools.imap instead of map
-itertools.ifilter instead of filter
-reduce instead of functools.reduce
-def pair(left, (pos, el)) is possible
-for .. in ..: yield .. instead of yield from -->
+        <section>
+        	<h2>What's for Python 2.*?</h2>
+        	<br/>
+        	<ul>
+        		<li><span style="font-family: Monaco; background: gray">itertools.imap</span> instead of <span style="font-family: Monaco; background: gray">map</span></li>
+        		<li><span style="font-family: Monaco; background: gray">itertools.ifilter</span> instead of <span style="font-family: Monaco; background: gray">filter</span></li>
+        		<li><span style="font-family: Monaco; background: gray">reduce</span> instead of <span style="font-family: Monaco; background: gray">functools.reduce</span></li>
+        		<li><span style="font-family: Monaco; background: gray">def pair(left, (pos, el))</span> is possible</li>
+        		<li><span style="font-family: Monaco; background: gray">for _ in _: yield _</span> instead of <span style="font-family: Monaco; background: gray">yield from</span></li>
+        	</ul>
+        </section>
 
         <!-- pros/cons -->
-<!-- Pros: 
-* readability
-* parallel execution (in theory)
+				<section>
+          <h2>Conclusions</h2>
 
-Cons:
-* immutability doesn't supported -->
+          <br />
+					<h3 style="color: #40FF00">Pro</h3>
+					
+					<ul>
+						<li>conciseness</li>
+						<li>possible parallel execution</li>
+					</ul>
+
+          <br />
+          <br />
+					<h3 style="color:  #FA5858">Con</h3>
+					<ul>
+						<li>immutability doesn't supported</li>
+					</ul>
+				</section>
         
         <!-- contacts, link to presentation -->
 				<section>
