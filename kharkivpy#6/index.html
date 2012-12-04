@@ -58,9 +58,9 @@
 					<br/>
 					<ul>
             <li>Short functional paradigm presentation</li>
-<!-- other point of view
-lazy seq to operation with data
-some info how iterators/generators work  -->
+            <li>Other point of view on algorithmic problems</li>
+            <li>Python iterators/generators usage and specific features</li>
+            <li>Lazy sequences to work with infinite data structures</li>
 					</ul>
 					
 					<h3 style="margin-top: 60px">More <b style="color:  #FA5858">How</b>, less <b style="color: #FA5858">Why</b></h3>
@@ -101,21 +101,21 @@ some info how iterators/generators work  -->
 					<p>
 						Imperative style = actions that change state from initial state to result
 					</p>
-					<pre><code contenteditable class="python">expr, res = "28*32***32**39", 0
+					<pre><code contenteditable class="python">expr, res = "28*32***32**39", 1
 for t in expr.split("*"):
     if t != "":
         res *= int(t)
 
 print res</code></pre>
-          <!-- <pre><code contenteditable class="python">"28*32***32**39", 0
-"28", 0
+          <pre><code contenteditable class="python">"28*32***32**39", 1
+"28", 1
 "32", 28
-"", 60
-"", 60
-"32", 60
-"", 92
-"39", 92
-131</code></pre> -->
+"", 896
+"", 896
+"32", 896
+"", 28672
+"39", 28672
+1118208</code></pre>
 				</section>
 
 				<section>
@@ -126,13 +126,13 @@ print res</code></pre>
 					</p>
 					<pre><code contenteditable class="python">from operator import mul
 expr = "28*32***32**39"
-print reduce(mul, map(int, filter(bool, expr.split("*"))))</code></pre>
+print reduce(mul, map(int, filter(bool, expr.split("*"))), 1)</code></pre>
 					<br />
-          <!-- <pre><code contenteditable class="python">"28*32***32**39"
+          <pre><code contenteditable class="python">"28*32***32**39"
 ["28","32","","","32","","39"]
 ["28","32","32","39"]
 [28,32,32,39]
-131</code></pre> -->
+1118208</code></pre>
 				</section>
 
         <!-- Lazy evaluation: from wikipedia -->
@@ -141,41 +141,90 @@ print reduce(mul, map(int, filter(bool, expr.split("*"))))</code></pre>
 					<br />
 					<ul>
 						<li>Avoid state</li>
-						<li><b>Immutable data</b></li>
+						<li><b style="color:  #FA5858">Immutable data</b></li>
 						<li>First-class, higher-order functions</li>
 						<li>Purity</li>
 						<li>Recursion, tail recursion</li>
-						<li><b>Iterators, sequences</b></li>
-						<li><b>Lazy evaluation</b></li>
+						<li><b style="color:  #FA5858">Iterators, sequences</b></li>
+						<li><b style="color:  #FA5858">Lazy evaluation</b></li>
 						<li>Pattern matching, monads....</li>
 					</ul>
 				</section>
 
         <!-- Lazy evaluation: from wikipedia -->
-<!-- In programming language theory, lazy evaluation or call-by-need[1] is an evaluation strategy which delays the evaluation of an expression until its value is needed (non-strict evaluation) and which also avoids repeated evaluations (sharing) -->
-<!-- The benefits of lazy evaluation include:
-Performance increases by avoiding needless calculations, and error conditions in evaluating compound expressions
-The ability to construct potentially infinite data structures
-The ability to define control flow (structures) as abstractions instead of primitives -->
+				<section>
+					<h2>Wikipedia: Lazy evaluation</h2>
+					<br />
+					<blockquote>
+					  In programming language theory, lazy evaluation or call-by-need is an evaluation strategy which delays the evaluation of an expression until its value is needed (non-strict evaluation) and which also avoids repeated evaluations (sharing)</p>
+					</blockquote>
+				</section>
 
+				<section>
+					<h2>Wikipedia: Lazy evaluation</h2>
+					<p>Benefits:</p>
+					<br />
+					<ul>
+  					<li>Performance increases</li>
+            <li>The ability to construct potentially infinite data structures</li>
+            <li>The ability to define control flow</li>
+  				</ul>
+				</section>
+        
         <!-- Lazy evaluation: fibonacci in Haskell -->
-<!-- fibs = 0 : 1 : zipWith (+) fibs (tail fibs) -->
+				<section>
+					<h2>Fibonacci in Haskell</h2>
+					<br />
+<pre><code contenteditable class="haskell">fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
+</code></pre>				
+					<br />
+					<p>Usage:</p>
+					
+<pre><code contenteditable class="haskell">Prelude> take 10 fibs
+[0,1,1,2,3,5,8,13,21,34]
+Prelude> take 20 fibs
+[0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181]</code></pre>								
+        </section>
 
         <!-- Lazy evaluation: fibonacci in Clojure -->
-<!-- user> (def fib (lazy-cat [0 1] (map + fib (rest fib)))) -->
-<!-- user> (take 10 fib)
-(0 1 1 2 3 5 8 13 21 34) -->
-
+			<section>
+				<h2>Fibonacci in Clojure</h2>
+				<br />
+<pre><code contenteditable class="clojure">user> (def fib (lazy-cat [0 1] (map + fib (rest fib))))
+user> (take 10 fib)
+(0 1 1 2 3 5 8 13 21 34)
+user> (take 20 fib)
+(0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181)</code></pre>								
+      </section>
+        
         <!-- Lazy evaluation: fibonacci in Scala -->
-<!-- def fib: Stream[Int] = 0 #:: 1 #:: fib.zip(fib.tail).map{case (a,b) => a + b} -->
+			<section>
+				<h2>Fibonacci in Scala</h2>
+				<br />
+<pre><code contenteditable class="scala">def fib: Stream[Int] = 
+    0 #:: 1 #:: fib.zip(fib.tail).map{case (a,b) => a + b} </code></pre>				
+      </section>
 
         <!-- Lazy evaluation: fibonacci in Python  -->
 <!-- Imperative, as you can see -->
-<!-- def fib():
+			<section>
+				<h2>Fibonacci in Python</h2>
+				<br />
+<pre><code contenteditable class="python">def fib():
     a, b = 0, 1
     while True:
         yield a
-        a, b = b, a+b -->
+        a, b = b, a+b</code></pre>				
+      <p>Usage:</p>
+<pre><code contenteditable class="python">>>> from itertools import islice
+>>> print list(islice(fib(), 10))
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+>>> print list(islice(fib(), 20))
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181]</code></pre>				
+
+      <br />
+      <p>Lazy, <span style="color:  #FA5858">imperative</span></p>
+      </section>
 
         <!-- task description -->
 <!-- "Pouring water problem"
@@ -235,26 +284,6 @@ Cons:
 					<br />
 					<h3 style="color: #40FF00">This presentation:</h3>
 					<p>https://github.com/kachayev/talks/kharkivpy#6</p>
-				</section>
-        
-				<section>
-				<h2>Python & FP</h2>
-				<h3 style="color:  #FA5858">Con</h3>
-<h3>Python</h3>
-<pre><code contenteditable class="python">map(lambda x: x*2, [1,2,3])
-</code></pre>				
-
-<h3>Scala</h3>
-<pre><code contenteditable class="scala">List(1,2,3).map(_*2)
-</code></pre>		
-
-<h3>Clojure</h3>
-<pre><code contenteditable class="clojure">(map #(* % 2) '(1 2 3))
-</code></pre>				
-
-<h3>Haskell</h3>
-<pre><code contenteditable class="haskell">map (2*) [1,2,3]
-</code></pre>				
 				</section>
 			</div>
 		</div>
