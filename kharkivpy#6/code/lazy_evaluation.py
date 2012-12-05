@@ -46,15 +46,15 @@ def update(container, *pairs):
     return reduce(pair, pairs, container)
 
 class lazy(object):
-    def __init__(self, gen):
-        self.gen = gen() if callable(gen) else gen
+    def __init__(self, origin):
+        self._origin = origin() if callable(origin) else origin
         self._state = []
         self._finished = False
     def __iter__(self):
         return self if not self._finished else iter(self._state)
     def next(self):
         try:
-            n = next(self.gen)
+            n = next(self._origin)
         except StopIteration, e:
             self._finished = True
             raise e

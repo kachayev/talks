@@ -19,19 +19,19 @@ from sys import maxint
 def take(limit, base): return islice(base, limit)
 def drop(limit, base): return islice(base, limit, None)
 
-class Stream(object):
+class Stream:
 
     __slots__ = ("_last", "_collection", "_origin")
 
-    class _StreamIterator(object):
+    class _StreamIterator:
         
         __slots__ = ("_stream", "_position")
 
         def __init__(self, stream):
             self._stream = stream
             self._position = -1 # not started yet
-            
-        def next(self):
+
+        def __next__(self):
             # check if elements are available for next position
             # return next element or raise StopIteration
             self._position += 1

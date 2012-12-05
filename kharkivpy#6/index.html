@@ -153,25 +153,26 @@ print reduce(mul, map(int, filter(bool, expr.split("*"))), 1)</code></pre>
 				</section>
 
         <!-- Lazy evaluation: from wikipedia -->
-				<section>
-					<h2>Wikipedia: Lazy evaluation</h2>
-					<br />
-					<blockquote>
-					  In programming language theory, lazy evaluation or call-by-need is an evaluation strategy which delays the evaluation of an expression until its value is needed (non-strict evaluation) and which also avoids repeated evaluations (sharing)</p>
-					</blockquote>
-				</section>
+  			<section>
+  				<h2>Wikipedia: Lazy evaluation</h2>
+  				<br />
+  				<blockquote>
+  				  In programming language theory, lazy evaluation or call-by-need is an evaluation strategy which delays the evaluation of an expression until its value is needed (non-strict evaluation) and which also avoids repeated evaluations (sharing)</p>
+  				</blockquote>
+  			</section>
 
-				<section>
-					<h2>Wikipedia: Lazy evaluation</h2>
-					<p>Benefits:</p>
-					<br />
-					<ul>
+  			<section>
+  				<h2>Wikipedia: Lazy evaluation</h2>
+  				<p>Benefits:</p>
+  				<br />
+  				<ul>
   					<li>Performance increases</li>
             <li>The ability to construct potentially infinite data structures</li>
             <li>The ability to define control flow</li>
   				</ul>
-				</section>
-        
+  			</section>
+
+
         <!-- Lazy evaluation: fibonacci in Haskell -->
 				<section>
 					<h2>Fibonacci in Haskell</h2>
@@ -237,44 +238,122 @@ user> (take 20 fib)
 
         <!-- CODE/ -->
         <!-- declare initial state -->
-				<section>
-					<h2>Code: declare initial state</h2>
-				</section>
-
         <!-- declare possible moves and "list" of all possible moves -->
 				<section>
-					<h2>Code: declare moves and path</h2>
-				</section>
-				<section>
-					<h2>Code: all possible moves</h2>
+					<h2>Code</h2>
+					<br />
+					<ul>
+					  <li>declare initial state</li>
+					  <li>declare moves and path</li>
+					  <li>declare all possible moves</li>
+					</ul>
+					<br />
+					<br />
+					<p><a href="https://github.com/kachayev/talks/blob/master/kharkivpy%236/code/lazy_evaluation_33.py#L80">lazy_evaluation.py</a></p>
 				</section>
 
         <!-- immutable operations on lists and why immutability matters -->
+
 				<section>
 					<h2>Code: immutable operations on list</h2>
+					<br />
+					<p>We need: create new list, change element at position</p>
+<pre><code contenteditable class="python">In [1]: update
+Out[1]: function __main__.update
+
+In [2]: update([1,2,3], (0, 10))
+Out[2]: [10, 2, 3]
+
+In [3]: update([1,2,3], (0, 10), (1, 20), (3, 30))
+Out[3]: [10, 20, 3]</code></pre>				
+  				</section>
+
+				<section>
+					<h2>Code: immutable operations on list</h2>
+					<br />
+					<p>Implementation. Think twice!</p>
+<pre><code contenteditable class="python">def update(container, *pairs):
+  """
+  Create copy of given container, chagning one (or more) elements.
+
+  Creating of new list is necessary here, cause we don't want to
+  deal with mutable data structure in current situation - it 
+  will be too problematic to keep everything working with many 
+  map/reduce operations if data will be mutable.
+  """ 
+  def pair(left, right):
+      pos, el = right
+      # todo: use takewhile/dropwhile or write "split-at" helper
+      return [(s if i != pos else el) for i, s in enumerate(left)]
+  return reduce(pair, pairs, container)</code></pre>				
+          
 				</section>
 
         <!-- class Lazy to deal with lack of "stream" support on language level -->
 				<section>
 					<h2>Code: "lazy" wrapper</h2>
+					<br />
+					<p>We need: wrap generator to "reuse" yields</p>
+<pre><code contenteditable class="python">In [4]: def gen():
+   ...:     yield 1
+   ...:     yield 2
+   ...:     yield 3
+   ...:     
+
+In [5]: g = gen()
+In [6]: list(g)
+Out[6]: [1, 2, 3]
+In [7]: list(g)
+Out[7]: []
+
+In [11]: glazy = lazy(gen)
+In [12]: list(glazy)
+Out[12]: [1, 2, 3]
+In [13]: list(glazy)
+Out[13]: [1, 2, 3]</code></pre>				
+				</section>
+				
+				<section>
+					<h2>Code: "lazy" wrapper</h2>
+					<br />
+					<p>Implementation</p>
+<pre><code contenteditable class="python">class lazy:
+    def __init__(self, origin, state=None):
+        self._origin = origin() if callable(origin) else origin
+        self._state = state or []
+        self._finished = False
+    def __iter__(self):
+        return self if not self._finished else iter(self._state)
+    def __next__(self):
+        try:
+            n = next(self._origin)
+        except StopIteration as e:
+            self._finished = True
+            raise e
+        else:
+            self._state.append(n)
+            return n
+</code></pre>				
+
 				</section>
 
         <!-- lead_to, folding, test for previous code -->
-				<section>
-					<h2>Code: end state declaration and folding</h2>
-				</section>
-
         <!-- started_at stream, solution declaration -->
-				<section>
-					<h2>Code: solution declaration</h2>
-				</section>
-
         <!-- debugging and printing result -->
+        <!-- class representation for Path -->
 				<section>
-					<h2>Code: Path class</h2>
+					<h2>Code</h2>
+					<br />
+					<ul>
+					  <li>end state declaration and folding</li>
+					  <li>solution declaration</li>
+					  <li>hint: Path class</li>
+					</ul>
+					<br />
+					<br />
+					<p><a href="https://github.com/kachayev/talks/blob/master/kharkivpy%236/code/lazy_evaluation_33.py#L115">lazy_evaluation.py</a></p>
 				</section>
 
-        <!-- class representation for Path -->
         <!-- /CODE -->
 
         <!-- what's for Python 2.*? -->
@@ -304,8 +383,10 @@ assert fib[20] == 6765
 assert fib[30:35] == [832040,1346269,2178309,3524578,5702887]</code></pre>				
 
           <br />
+          <p>Lazy, <span style="color:  #FA5858">declarative</span></p>
+          <br />
           <p>Stream implementation:</p>
-          <p><a href="https://github.com/kachayev/talks/blob/master/kharkivpy%236/code/stream.py">stream.py</a>
+          <p><a href="https://github.com/kachayev/talks/blob/master/kharkivpy%236/code/stream_33.py">stream.py</a>
 				</section>
 
 

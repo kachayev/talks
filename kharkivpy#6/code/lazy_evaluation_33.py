@@ -43,6 +43,7 @@ def update(container, *pairs):
     """ 
     def pair(left, right):
         pos, el = right
+        # todo: use takewhile/dropwhile or write "split-at" helper
         return [(s if i != pos else el) for i, s in enumerate(left)]
     return reduce(pair, pairs, container)
 
@@ -51,15 +52,15 @@ def foldr(l, r):
     return r(l)
 
 class lazy:
-    def __init__(self, gen, state=None):
-        self._gen = gen() if callable(gen) else gen
+    def __init__(self, origin, state=None):
+        self._origin = origin() if callable(origin) else origin
         self._state = state or []
         self._finished = False
     def __iter__(self):
         return self if not self._finished else iter(self._state)
     def __next__(self):
         try:
-            n = next(self._gen)
+            n = next(self._origin)
         except StopIteration as e:
             self._finished = True
             raise e
