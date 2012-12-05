@@ -1,6 +1,6 @@
 <!doctype html>  
 <html lang="en">
-	
+
 	<head>
 		<meta charset="utf-8">
 		
@@ -59,7 +59,7 @@
 					<ul>
             <li>Short functional paradigm presentation</li>
             <li>Other point of view on algorithmic problems</li>
-            <li>Python iterators/generators usage and specific features</li>
+            <li>Python iterators/generators: advanced usage</li>
             <li>Lazy sequences to work with infinite data structures</li>
 					</ul>
 					
@@ -270,7 +270,7 @@ user> (take 20 fib)
 
         <!-- debugging and printing result -->
 				<section>
-					<h2>Code: misc</h2>
+					<h2>Code: Path class</h2>
 				</section>
 
         <!-- class representation for Path -->
@@ -288,6 +288,24 @@ user> (take 20 fib)
         		<li><span style="font-family: Monaco; background: gray">for _ in _: yield _</span> instead of <span style="font-family: Monaco; background: gray">yield from</span></li>
         	</ul>
         </section>
+
+        <!-- stream implementation for fib -->
+				<section>
+					<h2>Advanced: Declarative fibonacci</h2>
+
+          <br />
+          <p>Our goal:</p>
+<pre><code contenteditable class="python">f = Stream()
+fib = f << [0, 1] << map(add, f, drop(1, f))
+
+assert list(take(10, fib)) == [0,1,1,2,3,5,8,13,21,34]
+assert fib[20] == 6765
+assert fib[30:35] == [832040,1346269,2178309,3524578,5702887]</code></pre>				
+
+          <br />
+          <p>Stream implementation:</p>
+				</section>
+
 
         <!-- pros/cons -->
 				<section>
