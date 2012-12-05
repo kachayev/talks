@@ -6,15 +6,13 @@
 ## Alexey Kachayev, <kachayev@gmail.com>
 ## 
 ## Link:
-## https://github.com/kachayev/talks/blob/master/master/kharkivpy%236/code/stream.py
-## 
-## version for Python 2.7+ 
-## version for Python 3.3+:
 ## https://github.com/kachayev/talks/blob/master/master/kharkivpy%236/code/stream_33.py
+## 
+## P.S. Python 3.3+
 ############################################
 
 from operator import add
-from itertools import islice, imap, chain
+from itertools import islice, map, chain
 from sys import maxint
 
 # shortcuts
@@ -108,7 +106,7 @@ assert list(s) == [1,2,3,4,5]
 # Fibonacci infinite sequence
 #----------------------------------    
 f = Stream()
-fib = f << [0, 1] << imap(add, f, drop(1, f))
+fib = f << [0, 1] << map(add, f, drop(1, f))
 
 assert list(take(10, fib)) == [0,1,1,2,3,5,8,13,21,34]
 assert fib[20] == 6765

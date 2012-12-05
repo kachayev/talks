@@ -1,7 +1,6 @@
 ############################################
 ## Topic:
 ## Lazy evaluation and declarative approach
-## to pathfinding algorithms implementation
 ## 
 ## Author:
 ## Alexey Kachayev, <kachayev@gmail.com>
@@ -10,8 +9,12 @@
 ## "Pouring water problem",
 ## http://www.codechef.com/problems/POUR1
 ## 
+## Link:
+## https://github.com/kachayev/talks/blob/master/kharkivpy%236/code/lazy_evaluation.py
+##
 ## version for Python 2.7+ 
-## version for Python 3.3+ is coming..
+## version for Python 3.3+:
+## https://github.com/kachayev/talks/blob/master/kharkivpy%236/code/lazy_evaluation_33.py
 ############################################
 
 from itertools import imap, islice, chain
@@ -188,25 +191,3 @@ def solutions(target):
 print solution(7)
 # output:
 # fill(0), pour(0, 1), fill(0), pour(0, 1), fill(0), pour(0, 1), empty(1), pour(0, 1), fill(0), pour(0, 1) ==> (0, 7)
-
-############################################
-## Other solution base on streams processing
-############################################
-
-# class Stream(object):
-#     def __init__(self, *gens):
-#         self._stream = chain(*gens) if len(gens) else iter([])
-#     def __iter__(self):
-#         return self._stream
-#     def __add__(self, other):
-#         return self.__class__(self._stream, other)
-# 
-# def started_at(path_sets, explored):
-#     more =  lazy(path + [m] for path in path_sets for m in moves if lead_to(path + [m]) not in explored)
-#     return path_sets + started_at(more, explored.union(set(imap(lead_to, more))))
-# 
-# ## lazy evaluated "list" with all possible 
-# ## pathes from initial state to end one 
-# path_sets = started_at(Stream([[]]), set([initial]))
-# 
-# print dump_path(solution(6))

@@ -11,14 +11,8 @@
 ## http://www.codechef.com/problems/POUR1
 ## 
 ## Link:
-## https://github.com/kachayev/talks/blob/master/lazy_evaluation_33.py
+## https://github.com/kachayev/talks/blob/master/kharkivpy%236/code/lazy_evaluation_33.py
 ## 
-## Additional information that can be interesting:
-## - named represenation for function
-## - using functions to represent some state/moves between states
-## - sequencies folding
-## - "yield from" statement
-##
 ## P.S. Python 3.3+
 ############################################
 
