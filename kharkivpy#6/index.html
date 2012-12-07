@@ -173,61 +173,6 @@ print reduce(mul, map(int, filter(bool, expr.split("*"))), 1)</code></pre>
   			</section>
 
 
-        <!-- Lazy evaluation: fibonacci in Haskell -->
-				<section>
-					<h2>Fibonacci in Haskell</h2>
-					<br />
-<pre><code contenteditable class="haskell">fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
-</code></pre>				
-					<br />
-					<p>Usage:</p>
-					
-<pre><code contenteditable class="haskell">Prelude> take 10 fibs
-[0,1,1,2,3,5,8,13,21,34]
-Prelude> take 20 fibs
-[0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181]</code></pre>								
-        </section>
-
-        <!-- Lazy evaluation: fibonacci in Clojure -->
-			<section>
-				<h2>Fibonacci in Clojure</h2>
-				<br />
-<pre><code contenteditable class="clojure">user> (def fib (lazy-cat [0 1] (map + fib (rest fib))))
-user> (take 10 fib)
-(0 1 1 2 3 5 8 13 21 34)
-user> (take 20 fib)
-(0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181)</code></pre>								
-      </section>
-        
-        <!-- Lazy evaluation: fibonacci in Scala -->
-			<section>
-				<h2>Fibonacci in Scala</h2>
-				<br />
-<pre><code contenteditable class="scala">def fib: Stream[Int] = 
-    0 #:: 1 #:: fib.zip(fib.tail).map{case (a,b) => a + b} </code></pre>				
-      </section>
-
-        <!-- Lazy evaluation: fibonacci in Python  -->
-<!-- Imperative, as you can see -->
-			<section>
-				<h2>Fibonacci in Python</h2>
-				<br />
-<pre><code contenteditable class="python">def fib():
-    a, b = 0, 1
-    while True:
-        yield a
-        a, b = b, a+b</code></pre>				
-      <p>Usage:</p>
-<pre><code contenteditable class="python">>>> from itertools import islice
->>> print list(islice(fib(), 10))
-[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
->>> print list(islice(fib(), 20))
-[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181]</code></pre>				
-
-      <br />
-      <p>Lazy, <span style="color:  #FA5858">imperative</span></p>
-      </section>
-
         <!-- task description -->
 				<section>
 					<h2>"Pouring water problem"</h2>
@@ -368,6 +313,62 @@ Out[13]: [1, 2, 3]</code></pre>
         		<li><span style="font-family: Monaco; background: gray">for _ in _: yield _</span> instead of <span style="font-family: Monaco; background: gray">yield from</span></li>
         	</ul>
         </section>
+
+        <!-- Lazy evaluation: fibonacci in Haskell -->
+				<section>
+					<h2>Fibonacci in Haskell</h2>
+					<br />
+<pre><code contenteditable class="haskell">fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
+</code></pre>				
+					<br />
+					<p>Usage:</p>
+
+<pre><code contenteditable class="haskell">Prelude> take 10 fibs
+[0,1,1,2,3,5,8,13,21,34]
+Prelude> take 20 fibs
+[0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181]</code></pre>								
+        </section>
+
+        <!-- Lazy evaluation: fibonacci in Clojure -->
+			<section>
+				<h2>Fibonacci in Clojure</h2>
+				<br />
+<pre><code contenteditable class="clojure">user> (def fib (lazy-cat [0 1] (map + fib (rest fib))))
+user> (take 10 fib)
+(0 1 1 2 3 5 8 13 21 34)
+user> (take 20 fib)
+(0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 1597 2584 4181)</code></pre>								
+      </section>
+
+        <!-- Lazy evaluation: fibonacci in Scala -->
+			<section>
+				<h2>Fibonacci in Scala</h2>
+				<br />
+<pre><code contenteditable class="scala">def fib: Stream[Int] = 
+    0 #:: 1 #:: fib.zip(fib.tail).map{case (a,b) => a + b} </code></pre>				
+      </section>
+
+        <!-- Lazy evaluation: fibonacci in Python  -->
+<!-- Imperative, as you can see -->
+			<section>
+				<h2>Fibonacci in Python</h2>
+				<br />
+<pre><code contenteditable class="python">def fib():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a+b</code></pre>				
+      <p>Usage:</p>
+<pre><code contenteditable class="python">>>> from itertools import islice
+>>> print list(islice(fib(), 10))
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]
+>>> print list(islice(fib(), 20))
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181]</code></pre>				
+
+      <br />
+      <p>Lazy, <span style="color:  #FA5858">imperative</span></p>
+      </section>
+
 
         <!-- stream implementation for fib -->
 				<section>
