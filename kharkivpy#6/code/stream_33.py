@@ -12,7 +12,7 @@
 ############################################
 
 from operator import add
-from itertools import islice, map, chain
+from itertools import islice, chain
 from sys import maxint
 
 # shortcuts
