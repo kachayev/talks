@@ -349,8 +349,17 @@ user> (take 20 fib)
 			<section>
 				<h2>Fibonacci in Scala</h2>
 				<br />
-<pre><code contenteditable class="scala">def fib: Stream[Int] = 
-    0 #:: 1 #:: fib.zip(fib.tail).map{case (a,b) => a + b} </code></pre>				
+<pre><code contenteditable class="scala">def fibs: Stream[Int] = 
+    0 #:: 1 #:: fibs.zip(fibs.tail).map{case (a,b) => a + b} </code></pre>				
+					<br />
+					<p>Usage:</p>
+
+<pre><code contenteditable class="scala">scala> fibs(10)
+res0: Int = 55
+scala> fibs.take(10).toArray
+res1: Array[Int] = Array(0, 1, 1, 2, 3, 5, 8, 13, 21, 34)
+scala> fibs.take(20).toArray
+res2: Array[Int] = Array(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181)</code></pre>								
       </section>
 
         <!-- Lazy evaluation: fibonacci in Python  -->
