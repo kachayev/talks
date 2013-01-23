@@ -56,6 +56,7 @@
 
                     <p>Prehistory</p>
                     <ul>
+                        <li><a href="https://github.com/kachayev/fn.py">github.com/kachayev/fn.py</a></li>
                         <li><a href="https://github.com/kachayev/talks/tree/master/uapycon2012">FP with Python</a></li>
                         <li><a href="https://github.com/kachayev/talks/tree/master/kharkivpy%236">Lazy evaluation and infinite sequences</a></li>
                     </ul>
@@ -90,8 +91,8 @@
 from fn.iters import zipwith
 from itertools import repeat
 
-assert list(map(_*2, range(5))) == [0,2,4,6,8]
-assert list(filter(_<10, [9,10,11])) == [9]
+assert list(map(_ * 2, range(5))) == [0,2,4,6,8]
+assert list(filter(_ < 10, [9,10,11])) == [9]
 assert list(zipwith(_ + _)([0,1,2], repeat(10))) == [10,11,12]
 </code></pre> 
 
