@@ -67,6 +67,7 @@
                 <li>Classical approach and problems: threads/locks/mutex</li>
                 <li>One task, different solutions: Actors, Channels, Agents and STM</li>
                 <li>What to choose and how to live with all this stuff?</li>
+                <li>p.s. Why functional programming matters</li>
             </ul>
         </section>
 
@@ -81,6 +82,165 @@ Concurrency is a way to structure software, particularly as a way to write clean
             <p><a href="http://vimeo.com/49718712">Video "Concurrency is not parallelism"</a></p>
         </section>
 
+        <section>
+            <h2>Tasks</h2>
+            <br />
+            <ul>
+                <li>Theory: <a href="http://en.wikipedia.org/wiki/Sleeping_barber_problem">Sleeping barber problem</a></li>
+                <li>Practise: Cache manager for image viewer (you want to show several images on mobile screen downloaded from server, but you are hardly limited in free memory and disk space)</li>
+            </ul>
+            <br />
+            <br />
+            <br />
+            <p> 
+                - Why should we solve this stupid theoretical tasks? <br />
+                - Cause any task from practise is much more harder 
+            </p> 
+        </section>
+
+        <!-- TODO: slide with cache manage description -->
+        <section>
+            <h2>Hah, it's easy. Use locks, Luke!</h2>
+            <br />
+
+            <p>"Classical" approach, each thread:
+            <ul>
+                <li>check resource on disc</li>
+                <li>"lock" hash map, check if someone download the same, "unlock" </li>
+                <li>check HTTP head for Content-Length</li>
+                <li>"lock" free space counter, try to subtrackt size, "unlock"</li>
+                <li>if succesfull, read from HTTP body to disk</li>
+                <li>if not, call somebody who will remove old file(s)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Hah, it's easy. Use locks, Luke!</h2>
+            <br />
+
+            <p>Hmmm, really?</p>
+            <ul>
+                <li>What to do with crashes during dowloading image?</li>
+                <li>What to do with "waiters" and how to manage free space on concurrent +/- operations?</li>
+                <li>How to manage free space more "smart": 10 * 1 mb is better that 1 * 10 mb?</li>
+                <li>How to "kill" task if image is not necessary (before it downloaded)?</li>
+                <li>How this program will work if we run 1000 "downloaders"?</li>
+                <li style="color:  #FA5858">Are you sure that your locks are good enough???</li>
+            </ul>
+
+        </section>
+
+        <section>
+            <h2>What the problem is with locks?</h2>
+            <br />
+            <p>Jonas Boner, <a href="http://www.slideshare.net/jboner/building-scalable-highly-concurrent-fault-tolerant-systems-lessons-learned">about fault-tolerant scaling</a>:
+            <br />
+            <br />
+            <ul>
+                <li>Locks do not compose</li>
+                <li>Locks breaks encaplutaion</li>
+                <li>Taking too few locks</li>
+                <li>Taking too many locks</li>
+                <li>Taking the wrong locks</li>
+                <li>Taking locks in wrong order</li>
+                <li>Error recovery is hard</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>What the problem is with locks?</h2>
+            <br />
+
+            <ul>
+                <li>It's not the nature of our world!!! (we don't ask world to stop to do something)</li>
+                <li>What to do with crashes in critical section?</li>
+                <li>Impossible to test: you will know about problem only "in production"</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Modern concurrency</h2>
+            <br />
+            <ul>
+                <li>Actors (message passing)</li>
+                <li>STM (Software Transactional Memory)</li>
+                <li>Dataflow Concurrency (<a href="http://doc.akka.io/docs/akka/snapshot/scala/dataflow.html">your homework</a>)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>What does actor looks like? (Theory)</h2>
+            <br />
+
+            <ul>
+                <li>Separated isolated lightweight processes (actor)</li>
+                <li>Share nothing, avoid side-effects (FP)</li>
+                <li>Pure message passing communication (mailbox)</li>
+                <li>Location transparency</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>What does actor looks like? (Go)</h2>
+
+            <!-- code samples for Go -->
+        </section>
+
+        <section>
+            <h2>What does actor looks like? (Scala)</h2>
+
+            <!-- code samples for Scala -->
+        </section>
+
+        <section>
+            <h2>Go Channels</h2>
+
+            <!-- code samples for Go -->
+        </section>
+
+        <section>
+            <h2>Go Channels</h2>
+
+            <!-- erlang message box -> channel in go -->
+        </section>
+
+        <section>
+            <h2>Clojure concurrency primitives</h2>
+
+            <!-- new approach to think about -->
+            <!-- list of primitives, more about STM as memory database -->
+            <!-- there are many STM implementations for other languages, but in Clojure this is basement -->
+        </section>
+
+        <section>
+            <h2>Clojure concurrency primitives</h2>
+
+            <!-- clojure code with solution -->
+        </section>
+
+        <section>
+            <h2>Clojure concurrency primitives</h2>
+
+            <!-- why functional programming matters: side-effect free, determinitive functions -->
+        </section>
+
+        <section>
+            <h2>How to live with this</h2>
+
+            <!-- law: if something bad can happen it will happen -->
+            <!-- example from Go about Mutex in random from SO -->
+        </section>
+
+        <section>
+            <h2>What to choose</h2>
+
+            <!-- most natural for you technology / OP --> 
+            <!-- try something else but convesion are rules --> 
+            <!-- from typesafe: steps how to deal with problems --> 
+            <!-- "I can write the same as Scala/Clojure/Go!" hah, really...? -->
+            <!-- if you need DISTRIBUTED concurrency, you need message passing -->
+            <!-- java concurrent programming book -->
+        </section>
 
         <section>
             <h2>Any questions?</h2>
@@ -90,9 +250,8 @@ Concurrency is a way to structure software, particularly as a way to write clean
             <h2 style="color:  #FA5858">Thanks for your attention</h3>
         </section>
 
-
-			</div>
 		</div>
+	    </div>
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.min.js"></script>
