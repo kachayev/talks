@@ -96,6 +96,7 @@ Concurrency is a way to structure software, particularly as a way to write clean
                 - Why should we solve this stupid theoretical tasks? <br />
                 - Cause any task from practise is much more harder 
             </p> 
+            <p style="font-size: smaller">Need more tasks from practise? Ping me after talk.</p>
         </section>
 
         <!-- TODO: slide with cache manage description -->
@@ -138,7 +139,7 @@ Concurrency is a way to structure software, particularly as a way to write clean
             <br />
             <ul>
                 <li>Locks do not compose</li>
-                <li>Locks breaks encaplutaion</li>
+                <li>Locks breaks encaplutaion <i>(you need to know a lot!)</i></li>
                 <li>Taking too few locks</li>
                 <li>Taking too many locks</li>
                 <li>Taking the wrong locks</li>
@@ -201,15 +202,25 @@ Concurrency is a way to structure software, particularly as a way to write clean
         <section>
             <h2>Go Channels</h2>
 
-            <!-- erlang message box -> channel in go -->
+            <br />
+            <p>"Rough analogy: writing to a file by name (process, Erlang) vs. writing to a file descriptor (channel, Go)." (c) Rob Pike</p>
+            <br />
+            <br />
+            <p>"Rough analogy: Assume Go channels as portable actor mailboxes" (c) Me</p>
         </section>
 
         <section>
             <h2>Clojure concurrency primitives</h2>
+            <br />
 
-            <!-- new approach to think about -->
-            <!-- list of primitives, more about STM as memory database -->
-            <!-- there are many STM implementations for other languages, but in Clojure this is basement -->
+            <ul>
+                <li>Desinged for <a href="http://clojure.org/concurrent_programming">concurrency</a></li>
+                <li>Identity and value are different things</li>
+                <li>Different approaches for sharing changing state</li>
+                <li>Software transactional memory - synchronous and coordinated approach (memory as database, with transactions and rollbacks)</li>
+                <li>Agent(s) - asynchronous and independent approach</li>
+                <li>Atom(s) - synchronous and independent approach</li>
+            </ul>
         </section>
 
         <section>
@@ -221,25 +232,60 @@ Concurrency is a way to structure software, particularly as a way to write clean
         <section>
             <h2>Clojure concurrency primitives</h2>
 
-            <!-- why functional programming matters: side-effect free, determinitive functions -->
+            <br />
+            <p>Why functional programming matters in Clojure: </p>
+            <br />
+            <ul>
+                <li>Side-effects free functions</li>
+                <li>Deterministic functions/calculations</li>
+            </ul>
         </section>
 
         <section>
             <h2>How to live with this</h2>
 
-            <!-- law: if something bad can happen it will happen -->
-            <!-- example from Go about Mutex in random from SO -->
+            <br />
+            <p><i>- I can write the same as Scala/Clojure/Go in Java/Python/..!<br />- hah, <span style="color:  #FA5858">really</span>...?</i></p>
+            <br /><br />
+    
+            <p>Everything that <span style="color:  #FA5858">can</span> go wrong <span style="color:  #FA5858">will</span> go wrong (c) Murphy</p>
+        </section>
+
+        <section>
+
+            <h2>How to live with this</h2>
+            <br />
+
+            <p><a href="http://stackoverflow.com/questions/14298523/why-does-adding-concurrency-slow-down-this-golang-code">Quetion</a>: Why does adding concurrency slow down this golang code?</p>
+
+            <br />
+            <p>Answer: The issue seems to come from your use of <code>rand.Float64()</code>, which uses a <span style="color:  #FA5858">shared global</span> object with a <span style="color:  #FA5858">Mutex lock</span> on it.</p>
+
         </section>
 
         <section>
             <h2>What to choose</h2>
 
-            <!-- most natural for you technology / OP --> 
-            <!-- try something else but convesion are rules --> 
-            <!-- from typesafe: steps how to deal with problems --> 
-            <!-- "I can write the same as Scala/Clojure/Go!" hah, really...? -->
-            <!-- if you need DISTRIBUTED concurrency, you need message passing -->
-            <!-- java concurrent programming book -->
+            <br />
+            <ul>
+                <li>Use most natural approach for you technology / OP (there are many STM implementations, but in Clojure it's basic idea)</li>
+                <li>Use "unusual" approach but remember that now only conventions rule</li>
+                <li>If you need distributed concurrency - use actors</li>
+            </ul>
+        </section>
+
+
+        <section>
+            <h2>What to choose</h2>
+
+            <br />
+            <p>For Scala developers from <a href="http://www.slideshare.net/jboner/building-scalable-highly-concurrent-fault-tolerant-systems-lessons-learned">Jonas Boner</a>:
+            <ul>
+                <li>Start with deterministic, declarative, immutable core</li>
+                <li>Add indeterminism selectively (actors)</li>
+                <li>Add mutability selectively (STM)</li>
+                <li>Finally: add locks and explicit threads</li>
+            </ul>
         </section>
 
         <section>
