@@ -187,13 +187,25 @@ Concurrency is a way to structure software, particularly as a way to write clean
         <section>
             <h2>What does actor looks like? (Erlang)</h2>
 
-            <!-- code samples for Erlang -->
+            <img src="screens/barber.start.erl.png"></script>
+            <br /><a href="https://gist.github.com/4634226">gist</a>
+        </section>
+
+        <section>
+            <h2>What does actor looks like? (Erlang)</h2>
+
+            <img src="screens/barber.end.erl.png"></script>
+            <br /><a href="https://gist.github.com/4634226">gist</a>
         </section>
 
         <section>
             <h2>What does actor looks like? (Scala)</h2>
 
-            <!-- code samples for Scala -->
+            <br /><br />
+            <ul>
+                <li>Very close to previous</li>
+                <li>Approaches for state handling (rough, in short words): actor is a state (Scala) VS passing state as argument (Erlang)</li>
+            </li>
         </section>
 
         <section>
@@ -280,8 +292,9 @@ Concurrency is a way to structure software, particularly as a way to write clean
             <br />
             <ul>
                 <li>Use most natural approach for you technology / OP (there are many STM implementations, but in Clojure it's basic idea)</li>
-                <li>Use "unusual" approach but remember that now only conventions rule</li>
-                <li>If you need distributed concurrency - use actors</li>
+                <li>Look deeply into your domain (presenters usually use most convenient case(s) to tell about functionality)</li>
+                <li>Use "unusual" approach but remember that on this way only conventions rule</li>
+                <li>If you need distributed concurrency - look at actors</li>
             </ul>
         </section>
 
