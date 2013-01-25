@@ -167,6 +167,9 @@ Concurrency is a way to structure software, particularly as a way to write clean
                 <li>STM (Software Transactional Memory)</li>
                 <li>Dataflow Concurrency (<a href="http://doc.akka.io/docs/akka/snapshot/scala/dataflow.html">your homework</a>)</li>
             </ul>
+
+            <br /><br />
+            <p style="font-size: smaller; font-family: monospace; text-align: left"><b>Rough analog</b>. You work in big free-space office with many programmers (hundreds), you have one board with pinned to it piece of paper. Each time you finish doing some task, you should increase number written on this paper. What options do you have? How will you organize everything?</p>
         </section>
 
         <section>
@@ -182,9 +185,9 @@ Concurrency is a way to structure software, particularly as a way to write clean
         </section>
 
         <section>
-            <h2>What does actor looks like? (Go)</h2>
+            <h2>What does actor looks like? (Erlang)</h2>
 
-            <!-- code samples for Go -->
+            <!-- code samples for Erlang -->
         </section>
 
         <section>
@@ -217,7 +220,7 @@ Concurrency is a way to structure software, particularly as a way to write clean
                 <li>Desinged for <a href="http://clojure.org/concurrent_programming">concurrency</a></li>
                 <li>Identity and value are different things</li>
                 <li>Different approaches for sharing changing state</li>
-                <li>Software transactional memory - synchronous and coordinated approach (memory as database, with transactions and rollbacks)</li>
+                <li>Software transactional memory - synchronous and coordinated approach (memory as database, atomicity, consistency, isolation)</li>
                 <li>Agent(s) - asynchronous and independent approach</li>
                 <li>Atom(s) - synchronous and independent approach</li>
             </ul>
@@ -226,7 +229,15 @@ Concurrency is a way to structure software, particularly as a way to write clean
         <section>
             <h2>Clojure concurrency primitives</h2>
 
-            <!-- clojure code with solution -->
+            <img src="screens/agent.clj.png"></script>
+            <br /><a href="https://gist.github.com/4632568">gist</a>
+        </section>
+
+        <section>
+            <h2>Clojure concurrency primitives</h2>
+
+            <img src="screens/barber.clj.png"></script>
+            <br /><a href="https://gist.github.com/3160721">gist</a>
         </section>
 
         <section>
