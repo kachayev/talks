@@ -162,14 +162,18 @@ Concurrency is a way to structure software, ...
         <section>
             <h2>Modern concurrency</h2>
             <br />
+            <br /><br />
+            <p style="font-size: smaller; font-family: monospace; text-align: left"><b>Think about!</b> You work in big free-space office with many programmers (hundreds), you have one board with pinned to it piece of paper. Each time you finish doing some task, you should increase number written on this paper. What options do you have? How will you organize everything? What will you do with paranoiac manager who wants to know how many tasks are already done (from time to time, often)?</p>
+        </section>
+
+        <section>
+            <h2>Modern concurrency</h2>
+            <br />
             <ul>
                 <li>Actors (message passing)</li>
                 <li>STM (Software Transactional Memory)</li>
                 <li>Dataflow Concurrency (<a href="http://doc.akka.io/docs/akka/snapshot/scala/dataflow.html">your homework</a>)</li>
             </ul>
-
-            <br /><br />
-            <p style="font-size: smaller; font-family: monospace; text-align: left"><b>Think about!</b> You work in big free-space office with many programmers (hundreds), you have one board with pinned to it piece of paper. Each time you finish doing some task, you should increase number written on this paper. What options do you have? How will you organize everything? What will you do with paranoiac manager who wants to know how many tasks are already done (from time to time, often)?</p>
         </section>
 
         <section>
@@ -292,6 +296,10 @@ Concurrency is a way to structure software, ...
             <br />
             <p>Answer: The issue seems to come from your use of <code>rand.Float64()</code>, which uses a <span style="color:  #FA5858">shared global</span> object with a <span style="color:  #FA5858">Mutex lock</span> on it.</p>
 
+        </section>
+
+        <section>
+            <img src="http://static.rcgroups.net/forums/attachments/2/4/1/4/8/7/a4189804-224-fuuuuu.png?d=1312471100" />
         </section>
 
         <section>
