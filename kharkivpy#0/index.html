@@ -63,7 +63,7 @@
             <br />
             <ul>
                 <li>More about concurrency, (much!) less about parallelism</li>
-                <li>Tasks: from practise and from theory</li>
+                <li>Tasks: from practice and from theory</li>
                 <li>Classical approach and problems: threads/locks/mutex</li>
                 <li>One task, different solutions: Actors, Channels, STM</li>
                 <li>What to choose and how to live with all this stuff?</li>
@@ -87,16 +87,16 @@ Concurrency is a way to structure software, ...
             <br />
             <ul>
                 <li>Theory: <a href="http://en.wikipedia.org/wiki/Sleeping_barber_problem">Sleeping barber problem</a></li>
-                <li>Practise: Cache manager for image viewer (you want to show several images on mobile screen downloaded from server, but you are hardly limited in free memory and disk space)</li>
+                <li>Practice: Cache manager for image viewer (you want to show several images on a mobile screen downloaded from a server, but you have hard limits on free memory and disk space)</li>
             </ul>
             <br />
             <br />
             <br />
             <p> 
-                - Why should we solve this stupid theoretical tasks? <br />
-                - Cause any task from practise is much more harder 
+                - Why should we solve this stupid theoretical task? <br />
+                - Cause any task from practice is much harder 
             </p> 
-            <p style="font-size: smaller">Need more tasks from practise? Ping me after talk.</p>
+            <p style="font-size: smaller">Need more tasks from practice? Ping me after the talk.</p>
         </section>
 
         <!-- TODO: slide with cache manage description -->
@@ -106,11 +106,11 @@ Concurrency is a way to structure software, ...
 
             <p>"Classical" approach, each thread:
             <ul>
-                <li>check resource on disc</li>
-                <li>"lock" hash map, check if someone download the same, "unlock" </li>
-                <li>check HTTP head for Content-Length</li>
-                <li>"lock" free space counter, try to subtrackt size, "unlock"</li>
-                <li>if succesfull, read from HTTP body to disk</li>
+                <li>check resource on disk</li>
+                <li>"lock" hash map, check if someone is downloading the same, "unlock" </li>
+                <li>check HTTP header for Content-Length</li>
+                <li>"lock" free space counter, try to subtract size, "unlock"</li>
+                <li>if successful, read from the HTTP body to disk</li>
                 <li>if not, call somebody who will remove old file(s)</li>
             </ul>
         </section>
@@ -121,25 +121,25 @@ Concurrency is a way to structure software, ...
 
             <p>Hmmm, really?</p>
             <ul>
-                <li>What to do with crashes during dowloading image?</li>
+                <li>What to do with crashes while downloading images?</li>
                 <li>What to do with "waiters" and how to manage free space on concurrent +/- operations?</li>
-                <li>How to manage free space more "smart": 10 * 1 mb is better that 1 * 10 mb?</li>
-                <li>How to "kill" task if image is not necessary (before it downloaded)?</li>
-                <li>How this program will work if we run 1000 "downloaders"?</li>
+                <li>How to manage free space more "intelligently": 10 * 1 mb is better that 1 * 10 mb?</li>
+                <li>How to "kill" a task if an image is not needed (before it's downloaded)?</li>
+                <li>How will this program work if we run 1000 "downloaders"?</li>
                 <li style="color:  #FA5858">Are you sure that your locks are good enough???</li>
             </ul>
 
         </section>
 
         <section>
-            <h2>What the problem is with locks?</h2>
+            <h2>What is the problem with locks?</h2>
             <br />
             <p>Jonas Boner, <a href="http://www.slideshare.net/jboner/building-scalable-highly-concurrent-fault-tolerant-systems-lessons-learned">about fault-tolerant scaling</a>:
             <br />
             <br />
             <ul>
                 <li>Locks do not compose</li>
-                <li>Locks breaks encaplutaion <i>(you need to know a lot!)</i></li>
+                <li>Locks breaks encapsulation <i>(you need to know a lot!)</i></li>
                 <li>Taking too few locks</li>
                 <li>Taking too many locks</li>
                 <li>Taking the wrong locks</li>
@@ -149,13 +149,13 @@ Concurrency is a way to structure software, ...
         </section>
 
         <section>
-            <h2>What the problem is with locks?</h2>
+            <h2>What is the problem with locks?</h2>
             <br />
 
             <ul>
-                <li>It's not the nature of our world!!! (we don't ask world to stop to do something)</li>
-                <li>What to do with crashes in critical section?</li>
-                <li>Impossible to test: you will know about problem only "in production"</li>
+                <li>It's not the nature of our world!!! (we don't ask the world to stop to do something)</li>
+                <li>What to do with crashes in a critical section?</li>
+                <li>Impossible to test: you will know about the problem only "in production"</li>
             </ul>
         </section>
 
@@ -163,7 +163,7 @@ Concurrency is a way to structure software, ...
             <h2>Modern concurrency</h2>
             <br />
             <br /><br />
-            <p style="font-size: smaller; font-family: monospace; text-align: left"><b>Think about!</b> You work in big free-space office with many programmers (hundreds), you have one board with pinned to it piece of paper. Each time you finish doing some task, you should increase number written on this paper. What options do you have? How will you organize everything? What will you do with paranoiac manager who wants to know how many tasks are already done (from time to time, often)?</p>
+            <p style="font-size: smaller; font-family: monospace; text-align: left"><b>Think about it!</b> You work in a big free-space office with many programmers (hundreds), you have one board with a piece of paper pinned to it. Each time someone finishes doing a task, he or she should increase the number written on this paper. What options do you have? How will you organize everything? What will you do with paranoid manager who wants to know how many tasks are already done (from time to time, often)?</p>
         </section>
 
         <section>
@@ -208,7 +208,7 @@ Concurrency is a way to structure software, ...
             <br /><br />
             <ul>
                 <li>Very close to previous</li>
-                <li>Approaches for state handling (rough, in short words): actor is a state (Scala) VS passing state as argument (Erlang)</li>
+                <li>Approaches for state handling (rough, in short words): actor is a state (Scala) VS. passing state as an argument (Erlang)</li>
             </li>
         </section>
 
@@ -241,7 +241,7 @@ Concurrency is a way to structure software, ...
             <br />
 
             <ul>
-                <li>Desinged for <a href="http://clojure.org/concurrent_programming">concurrency</a></li>
+                <li>Designed for <a href="http://clojure.org/concurrent_programming">concurrency</a></li>
                 <li>Identity and value are different things</li>
                 <li>Different approaches for sharing changing state</li>
                 <li>Software transactional memory - synchronous and coordinated approach (memory as database, atomicity, consistency, isolation)</li>
@@ -271,7 +271,7 @@ Concurrency is a way to structure software, ...
             <p>Why functional programming matters in Clojure: </p>
             <br />
             <ul>
-                <li>Side-effects free functions</li>
+                <li>Side-effect free functions</li>
                 <li>Deterministic functions/calculations</li>
             </ul>
         </section>
@@ -291,7 +291,7 @@ Concurrency is a way to structure software, ...
             <h2>How to live with this</h2>
             <br />
 
-            <p><a href="http://stackoverflow.com/questions/14298523/why-does-adding-concurrency-slow-down-this-golang-code">Quetion</a>: Why does adding concurrency slow down this golang code?</p>
+            <p><a href="http://stackoverflow.com/questions/14298523/why-does-adding-concurrency-slow-down-this-golang-code">Question</a>: Why does adding concurrency slow down this golang code?</p>
 
             <br />
             <p>Answer: The issue seems to come from your use of <code>rand.Float64()</code>, which uses a <span style="color:  #FA5858">shared global</span> object with a <span style="color:  #FA5858">Mutex lock</span> on it.</p>
@@ -308,7 +308,7 @@ Concurrency is a way to structure software, ...
             <br />
             <ul>
                 <li>There is no silver bullet</li>
-                <li>Use most natural approach for you technology / OP (there are many STM implementations, but in Clojure it's basic idea)</li>
+                <li>Use most natural approach for your technology / OP (there are many STM implementations, but in Clojure it's idiomatic and part of the core)</li>
                 <li>Look deeply into your domain (presenters usually use most convenient case(s) to tell about functionality)</li>
                 <li>Use "unusual" approach but remember that on this way only conventions rule</li>
                 <li>If you need distributed concurrency - look at actors</li>
@@ -333,7 +333,7 @@ Concurrency is a way to structure software, ...
             <h2>Any questions?</h2>
             <br />
             <ul>
-                <li><a href="https://github.com/kachayev/talks/tree/master/kharkivpy%230">This slides</a> (PDF is comming!)</li>
+                <li><a href="https://github.com/kachayev/talks/tree/master/kharkivpy%230">These slides</a> (PDF is coming!)</li>
                 <li><a href="https://github.com/kachayev/talks">Other presentations</a></li>
                 <li>Me on <a href="http://github.com/kachayev">Github</a></li>
                 <li>Me on <a href="http://twitter.com/kachayev">Twitter</a></li>
