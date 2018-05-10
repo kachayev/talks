@@ -453,18 +453,16 @@ simple_sum = fsum(int) ## fsum(lambda x: x)</code></pre>
 
 				<section>
 					<h2>Good function is small function</h2>
+<pre><code contenteditable class="python">>>> ss = ["UA", "PyCon", "2012"]</code></pre>
 <br />
 <h3 style="color:  #FA5858">Bad</h3>
-<pre><code contenteditable class="python">>>> ss = ["UA", "PyCon", "2012"]
->>> reduce(lambda acc, s: acc + len(s), ss, 0)
+<pre><code contenteditable class="python">>>> reduce(lambda acc, s: acc + len(s), ss, 0)
 11</code></pre>	
 <h3>Not bad...</h3>
-<pre><code contenteditable class="python">>>> ss = ["UA", "PyCon", "2012"]
->>> reduce(lambda l,r: l+r, map(lambda s: len(s), ss))
+<pre><code contenteditable class="python">>>> reduce(lambda l,r: l+r, map(lambda s: len(s), ss))
 11</code></pre>	
 <h3 style="color: #40FF00">Good</h3>
-<pre><code contenteditable class="python">>>> ss = ["UA", "PyCon", "2012"]
->>> reduce(operator.add, map(len, ss))
+<pre><code contenteditable class="python">>>> sum(map(len, ss))
 11</code></pre>	
 				</section>
 
