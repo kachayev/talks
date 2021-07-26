@@ -1,232 +1,301 @@
-<!doctype html>  
+<!doctype html>
 <html lang="en">
+
 <head>
     <title>Oleksii Kachaiev</title>
 
-    <link rel='stylesheet' id='googleFonts-css'  href='https://fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C700italic%2C400%2C300%2C700%2C800&#038;ver=4.9.5' type='text/css' media='all' />
+    <link rel='stylesheet' id='googleFonts-css'
+        href='https://fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C700italic%2C400%2C300%2C700%2C800&#038;ver=4.9.5'
+        type='text/css' media='all' />
 
 
     <style>
-     body {
-         font-size: 16px;
-         font-family: 'Open Sans', sans-serif;
-         color: #5F5C52;
-     }
+        body {
+            font-size: 16px;
+            font-family: 'Open Sans', sans-serif;
+            color: #5F5C52;
+        }
 
-     a {
-         color: #3AB8E6;
-         font-weight: bold;
-     }
+        a {
+            color: #3AB8E6;
+            font-weight: bold;
+        }
 
-     a:hover {color: #2A7692;}
+        a:hover {
+            color: #2A7692;
+        }
 
-     h1 {font-size: 44px;margin-top:28px;margin-bottom:28px;}
-     h3 {font-size: 22px;margin-top:48px;margin-bottom:28px;}
-     h4 {margin-top:24px;}
+        h1 {
+            font-size: 44px;
+            margin-top: 28px;
+            margin-bottom: 28px;
+        }
 
-     .wrapper {margin-left:8%;margin-right:8%;margin-top:6%;}
-     .footer {margin-top:44px;margin-bottom:44px;}
+        h3 {
+            font-size: 22px;
+            margin-top: 48px;
+            margin-bottom: 28px;
+        }
+
+        h4 {
+            margin-top: 24px;
+        }
+
+        .wrapper {
+            margin-left: 8%;
+            margin-right: 8%;
+            margin-top: 6%;
+        }
+
+        .footer {
+            margin-top: 44px;
+            margin-bottom: 44px;
+        }
     </style>
 </head>
+
 <body>
 
     <div class="wrapper">
 
-    <h1>Oleksii Kachaiev</h1>
+        <h1>Oleksii Kachaiev</h1>
 
-    <p>Principal Software Engineer @ Riot Games, Inc.</p>
+        <p>Principal Software Engineer @ Riot Games, Inc.</p>
 
-    <p>
-    	I work on ML/AI for League of Legends.
-	<br/>
-	<br/>
-	As a hobby, I do a research on <b>representation learning</b> techniques and <b>graph neural networks</b> for gameplay modeling.
-	<br/>
-	<br/>
-        Scientifically interested in <b>algebras</b> and <b>theory of computation</b>. 
-	<br/>
-        <br/>
-        Previously put a lot of effort into network <b>protocols</b> (including MQTT, HTTP/2 and QUIC &#128561),
-        <br/>
-	<b>async</b> programming runtimes, <b>dependent types</b>, <b>symbolic PLs</b> and <b>graph rewriting</b> systems.
-        <br/>
-    </p>
+        <p>
+            I work on ML/AI for League of Legends.
+            <br />
+            <br />
+            Research interests: computational intelligence in video games.
+            <br />
+            <br />
+            <br />
+            Previously put a lot of effort into network <b>protocols</b> (including MQTT, HTTP/2 and QUIC &#128561),
+            <br />
+            <b>async</b> programming runtimes, <b>dependent types</b>, <b>symbolic PLs</b> and <b>graph rewriting</b>
+            systems.
+            <br />
+        </p>
 
-    <h3>Libraries</h3>
+        <h3>Research</h3>
 
-    <div>
-        <h4><a href="https://github.com/kachayev/pyage2" target="_blank">PyAge2</a></h4>
-	<p>"Age of Empires II" Learning Environment</p>
-    </div>
-	    
-    <div>
-        <h4><a href="https://github.com/kachayev/dataclasses-tensor" target="_blank">dataclasses-tensor</a></h4>
-	<p>Easily serialize dataclasses to and from tensors (PyTorch tensors or NumPy ndarrays)</p>
-    </div>
+        <p>
+            I strongly believe that creating AI agents that can play alongside with humans is a much harder problem than playing against them.
+        </p>
 
-    <div>
-        <h4><a href="https://github.com/kachayev/quiche4j" target="_blank">Quiche4j</a></h4>
-        <p>QUIC transport protocol and HTTP/3 for Java</p>
-    </div>
+        <p>
+            To make it possible for triple-A games to incorporate cooperative AI agents into complex immersive dynamical enviornments, there are a lot of gaps we need to close.
 
-    <div>
-        <h4><a href="https://github.com/ztellman/aleph" target="_blank">aleph</a> (active contributor)</h4>
-        <p>Asynchronous communication for Clojure.</p>
-    </div>
+            Among others, there are a few areas I find most challenging and compelling:
 
-    <div>
-	<h4><a href="https://github.com/kachayev/timely0" target="_blank">timely0</a></h4>
-	<p>Minimalistic implementation of Naiad paper "A Timely Dataflow System" in Scala.</p>
-    </div>
+            <ul>
+                <li><b>Hierarchical long-horizon co-planning.</b> Including recognition of a player's intent on different levels of planning, and being able to adjust own actions accordinly.</li>
+                <li><b>Intelligent credit assignment.</b> The agent should be able to evaluate if its actions actually helped.</li>
+                <li>Ability to <b>communicate</b> intent clearly paired with understanding of the uncertainty from the perspective of other agents (to be able to recognize when communication is necessary).</li>
+            </ul>
+        </p>
 
-    <div>
-        <h4><a href="https://github.com/kachayev/camille-sql" target="_blank">camille-sql</a></h4>
-	<p>Run SQL queries over your Maven artifacts cache.</p>
-    </div>
+        <h3>Libraries</h3>
 
-    <div>
-        <h4><a href="https://github.com/kachayev/nasus" target="_blank">nasus http.server</a></h4>
-        <p>A simple zero-configuration command-line HTTP files server that scales.</p>
-    </div>
+        <div>
+            <h4><a href="https://github.com/kachayev/pyage2" target="_blank">PyAge2</a></h4>
+            <p>"Age of Empires II" Learning Environment</p>
+        </div>
 
-    <div>
-        <h4><a href="https://github.com/kachayev/muse" target="_blank">muse</a></h4>
-        <p>Clojure library that makes remote data access code elegant and efficient at the same time.</p>
-    </div>
+        <div>
+            <h4><a href="https://github.com/kachayev/dataclasses-tensor" target="_blank">dataclasses-tensor</a></h4>
+            <p>Easily serialize dataclasses to and from tensors (PyTorch tensors or NumPy ndarrays)</p>
+        </div>
 
-    <div>
-        <h4><a href="https://github.com/KitApps/schema-refined" target="_blank">schema-refined</a></h4>
-        <p>Clojure library to keep you away from bugs with precise schemas (refined types with runtime checks).</p>
-    </div>
+        <div>
+            <h4><a href="https://github.com/kachayev/quiche4j" target="_blank">Quiche4j</a></h4>
+            <p>QUIC transport protocol and HTTP/3 for Java</p>
+        </div>
 
-    <div>
-        <h4><a href="https://github.com/kachayev/fn.py" target="_blank">fn.py</a></h4>
-        <p>Functional programming in Python: implementation of missing features to enjoy FP.</p>
-    </div>
+        <div>
+            <h4><a href="https://github.com/ztellman/aleph" target="_blank">aleph</a> (active contributor)</h4>
+            <p>Asynchronous communication for Clojure.</p>
+        </div>
 
-    <h3>Essays</h3>
+        <div>
+            <h4><a href="https://github.com/kachayev/timely0" target="_blank">timely0</a></h4>
+            <p>Minimalistic implementation of Naiad paper "A Timely Dataflow System" in Scala.</p>
+        </div>
 
-    <p>
-        <a href="https://gist.github.com/kachayev/9911710758b56477e7423b5bd8dad144">Aleph, Async, HTTP, Clojure</a> | 01/26/2019
-    </p>
+        <div>
+            <h4><a href="https://github.com/kachayev/camille-sql" target="_blank">camille-sql</a></h4>
+            <p>Run SQL queries over your Maven artifacts cache.</p>
+        </div>
 
-    <p>
-        <a href="http://goo.gl/JNFSPB">Go: Channels Are Not Enough</a> | 09/14/2014
-    </p>
+        <div>
+            <h4><a href="https://github.com/kachayev/nasus" target="_blank">nasus http.server</a></h4>
+            <p>A simple zero-configuration command-line HTTP files server that scales.</p>
+        </div>
 
-    <p>
-        <a href="http://goo.gl/WDRKkT">Parsing CSS File with Monadic Parser in Clojure</a> | 08/30/2014
-    </p>
+        <div>
+            <h4><a href="https://github.com/kachayev/muse" target="_blank">muse</a></h4>
+            <p>Clojure library that makes remote data access code elegant and efficient at the same time.</p>
+        </div>
 
-    <h3>Talks</h3>
+        <div>
+            <h4><a href="https://github.com/KitApps/schema-refined" target="_blank">schema-refined</a></h4>
+            <p>Clojure library to keep you away from bugs with precise schemas (refined types with runtime checks).</p>
+        </div>
 
-    <p>
-        <a href="https://speakerdeck.com/kachayev/talking-sql-to-strangers" target="_blank">Talking SQL to Strangers</a> on how to create system that understands SQL language as an API | 05/29/2020
-    </p>
+        <div>
+            <h4><a href="https://github.com/kachayev/fn.py" target="_blank">fn.py</a></h4>
+            <p>Functional programming in Python: implementation of missing features to enjoy FP.</p>
+        </div>
 
-    <p>
-        <a href="https://speakerdeck.com/kachayev/managing-data-chaos-in-the-world-of-microservices" target="_blank">Managing Data Chaos in the World of Microservices</a> | 09/13/2018, StrataData '18, New York
-    </p>
+        <h3>Essays</h3>
 
-    <p>
-        <a href="https://speakerdeck.com/kachayev/deep-http-dive-through-aleph-and-netty" target="_blank">Deep HTTP Dive Through Aleph &amp; Netty Internals</a> | 07/10/2018, Clojure Tech Talk, Kyiv
-    </p>
+        <p>
+            <a href="https://gist.github.com/kachayev/9911710758b56477e7423b5bd8dad144">Aleph, Async, HTTP, Clojure</a>
+            | 01/26/2019
+        </p>
 
-  <p>
-      <a href="https://speakerdeck.com/kachayev/keep-your-data-safe-with-refined-types" target="_blank">Keep Your Data Safe With Refined Types</a> | 06/19/2018, Clojure Meetup, Kyiv
-  </p>
+        <p>
+            <a href="http://goo.gl/JNFSPB">Go: Channels Are Not Enough</a> | 09/14/2014
+        </p>
 
-  <p>
-      <a href="https://t.co/ak7eyqigEw">Clojure @ Attendify: Experience Report</a> | 11/14/2017, Attendify Clojure Meetup, Kyiv
-  </p>
-  <p>
-    <a href="https://goo.gl/2st1ej">Finagle & Clojure</a> | 08/13/2015, FinagleCon 2015, San-Francisco
-  </p>
-  <p>
-    <a href="https://goo.gl/h4Zuvr">Efficient, Concurrent and Concise Data Access</a> | <a href="https://goo.gl/masrsz">Video</a> | 06/26/2015, EuroClojure 2015, Barcelona
-  </p>
-    <p>
-        <a href="http://goo.gl/eDpSKf">Microservices in Clojure. Lessons learned</a> | 04/16/2015, Kyiv Clojure Meetup #7
-    </p>
-    <p>
-        <a href="http://goo.gl/7pwjpz">Errors Handling with core.async</a> | 10/22/2014, Kyiv Clojure Meetup #4
-    </p>
-    <p>
-        <a href="http://goo.gl/HOvrg4">Deterministic Parallel and Distributed Programming with Clojure. Quick Intro</a> | 07/03/2014, KievFProg #7
-    </p>
-    <p>
-        <a href="http://goo.gl/n4ylC4">Monadic Parsing in Python</a> | 06/07/2014, KyivPy #12
-    </p>
-    <p>
-        <a href="http://goo.gl/FMShPi">Fn.py: Persistent Data Structures</a> | 03/22/2014, Kharkiv.py #10
-    </p>
-    <p>
-      <a href="http://goo.gl/4onX7Y">Erlang in Production. Lessons learned</a> | 11/16/2013, KyivFProg #11
-    </p>
-    <p>
-      <a href="http://goo.gl/Jme06c">Union-based Heaps in Haskell and Python</a> | 10/26/2013, KyivPy #11
-    </p>
-    <p>
-        <a href="http://goo.gl/pQhE09">Channels &amp; Concurrency: Go, Clojure, Erlang, Scala, Haskell</a> | 08/03/2013, KievFProg
-    </p>
-    <p>
-        <a href="http://goo.gl/CIMS2">Real-time collaboration with Erlang and Websockets</a> | <a href="http://goo.gl/HfT01">Repo</a> | <a href="http://goo.gl/CIMS2">History</a> | 06/01/2013, HotCode 2013
-    </p>
-    <p>
-        <a href="http://goo.gl/Fc29z">Streams as fundumental abstraction</a> | 06/01/2013, HotCode 2013
-    </p>
-    <p>
-        <a href="http://goo.gl/yqqTf">Web, Concurrency &amp; Functional Programming</a> | 05/31/2013, HotCode 2013
-    </p>
-    <p>
-        <a href="iforum2013/index.html">Functional programming for Web</a> | <a href="https://github.com/kachayev/talks/blob/master/iforum2013/fp_web.pdf?raw=true">PDF</a> | 04/24/2013, iForum 2013
-    </p>
-    <p>
-        <a href="kyivpy%2310/index.html">Stop Coding Pascal</a> | <a href="https://github.com/kachayev/talks/blob/master/kyivpy%2310/stop_coding_pascal.pdf?raw=true">PDF</a> | 04/06/2013, KyivPy #10
-    </p>
-    <p>
-        <a href="kyivfprog/index.html">Fn.py: ideas and internals</a> | <a href="https://github.com/kachayev/talks/raw/master/kyivfprog/Fn.py.pdf">PDF</a> | 03/27/2013, Kyiv FProg
-    </p>
-    <p>
-        <a href="kharkivpy%230/index.html#/">Modern Concurrency: Erlang, Scala, Go, Clojure</a> | <a href="https://github.com/kachayev/talks/raw/master/kharkivpy%230/Kachayev_Modern_Concurrency.pdf">PDF</a> | 01/26/2013, KharkivPy #0
-    </p>
-    <p>
-        <a href="kyivpy%239/index.html#/">Fn.py: enjoy FP in Python</a> | 01/19/2013, KyivPy #9
-    </p>
-    <p>
-        <a href="kharkivpy%236/index.html">Lazy evaluation and declarative approach in Python</a> | <a href="https://github.com/kachayev/talks/raw/master/kharkivpy%236/Kachayev_Lazy_evaluation_in_Python.pdf">PDF</a> | 12/08/2012, KharkivPy #6
-    </p>
-    <p>
-        <a href="uapycon2012/index.html">Functional programming with Python</a> | <a href="https://github.com/kachayev/talks/raw/master/uapycon2012/Kachayev_Functional_Programming_with_Python.pdf">PDF</a> | 10/20/2012, Kyiv, PyCon UA 2012
-    </p>
+        <p>
+            <a href="http://goo.gl/WDRKkT">Parsing CSS File with Monadic Parser in Clojure</a> | 08/30/2014
+        </p>
 
-    <hr/>
+        <h3>Talks</h3>
 
-    <div class="footer">
+        <p>
+            <a href="https://speakerdeck.com/kachayev/talking-sql-to-strangers" target="_blank">Talking SQL to
+                Strangers</a> on how to create system that understands SQL language as an API | 05/29/2020
+        </p>
 
-    <p>
-        Oleksii Kachaiev (c) 2012-2020
-    </p>
-    <p>
-        @<a href="http://github.com/kachayev">github</a> | @<a href="http://twitter.com/kachayev">twitter</a> | mail: kachayev <$> gmail dot com
-    </p>
+        <p>
+            <a href="https://speakerdeck.com/kachayev/managing-data-chaos-in-the-world-of-microservices"
+                target="_blank">Managing Data Chaos in the World of Microservices</a> | 09/13/2018, StrataData '18, New
+            York
+        </p>
 
-    </div>
+        <p>
+            <a href="https://speakerdeck.com/kachayev/deep-http-dive-through-aleph-and-netty" target="_blank">Deep HTTP
+                Dive Through Aleph &amp; Netty Internals</a> | 07/10/2018, Clojure Tech Talk, Kyiv
+        </p>
+
+        <p>
+            <a href="https://speakerdeck.com/kachayev/keep-your-data-safe-with-refined-types" target="_blank">Keep Your
+                Data Safe With Refined Types</a> | 06/19/2018, Clojure Meetup, Kyiv
+        </p>
+
+        <p>
+            <a href="https://t.co/ak7eyqigEw">Clojure @ Attendify: Experience Report</a> | 11/14/2017, Attendify Clojure
+            Meetup, Kyiv
+        </p>
+        <p>
+            <a href="https://goo.gl/2st1ej">Finagle & Clojure</a> | 08/13/2015, FinagleCon 2015, San-Francisco
+        </p>
+        <p>
+            <a href="https://goo.gl/h4Zuvr">Efficient, Concurrent and Concise Data Access</a> | <a
+                href="https://goo.gl/masrsz">Video</a> | 06/26/2015, EuroClojure 2015, Barcelona
+        </p>
+        <p>
+            <a href="http://goo.gl/eDpSKf">Microservices in Clojure. Lessons learned</a> | 04/16/2015, Kyiv Clojure
+            Meetup #7
+        </p>
+        <p>
+            <a href="http://goo.gl/7pwjpz">Errors Handling with core.async</a> | 10/22/2014, Kyiv Clojure Meetup #4
+        </p>
+        <p>
+            <a href="http://goo.gl/HOvrg4">Deterministic Parallel and Distributed Programming with Clojure. Quick
+                Intro</a> | 07/03/2014, KievFProg #7
+        </p>
+        <p>
+            <a href="http://goo.gl/n4ylC4">Monadic Parsing in Python</a> | 06/07/2014, KyivPy #12
+        </p>
+        <p>
+            <a href="http://goo.gl/FMShPi">Fn.py: Persistent Data Structures</a> | 03/22/2014, Kharkiv.py #10
+        </p>
+        <p>
+            <a href="http://goo.gl/4onX7Y">Erlang in Production. Lessons learned</a> | 11/16/2013, KyivFProg #11
+        </p>
+        <p>
+            <a href="http://goo.gl/Jme06c">Union-based Heaps in Haskell and Python</a> | 10/26/2013, KyivPy #11
+        </p>
+        <p>
+            <a href="http://goo.gl/pQhE09">Channels &amp; Concurrency: Go, Clojure, Erlang, Scala, Haskell</a> |
+            08/03/2013, KievFProg
+        </p>
+        <p>
+            <a href="http://goo.gl/CIMS2">Real-time collaboration with Erlang and Websockets</a> | <a
+                href="http://goo.gl/HfT01">Repo</a> | <a href="http://goo.gl/CIMS2">History</a> | 06/01/2013, HotCode
+            2013
+        </p>
+        <p>
+            <a href="http://goo.gl/Fc29z">Streams as fundumental abstraction</a> | 06/01/2013, HotCode 2013
+        </p>
+        <p>
+            <a href="http://goo.gl/yqqTf">Web, Concurrency &amp; Functional Programming</a> | 05/31/2013, HotCode 2013
+        </p>
+        <p>
+            <a href="iforum2013/index.html">Functional programming for Web</a> | <a
+                href="https://github.com/kachayev/talks/blob/master/iforum2013/fp_web.pdf?raw=true">PDF</a> |
+            04/24/2013, iForum 2013
+        </p>
+        <p>
+            <a href="kyivpy%2310/index.html">Stop Coding Pascal</a> | <a
+                href="https://github.com/kachayev/talks/blob/master/kyivpy%2310/stop_coding_pascal.pdf?raw=true">PDF</a>
+            | 04/06/2013, KyivPy #10
+        </p>
+        <p>
+            <a href="kyivfprog/index.html">Fn.py: ideas and internals</a> | <a
+                href="https://github.com/kachayev/talks/raw/master/kyivfprog/Fn.py.pdf">PDF</a> | 03/27/2013, Kyiv FProg
+        </p>
+        <p>
+            <a href="kharkivpy%230/index.html#/">Modern Concurrency: Erlang, Scala, Go, Clojure</a> | <a
+                href="https://github.com/kachayev/talks/raw/master/kharkivpy%230/Kachayev_Modern_Concurrency.pdf">PDF</a>
+            | 01/26/2013, KharkivPy #0
+        </p>
+        <p>
+            <a href="kyivpy%239/index.html#/">Fn.py: enjoy FP in Python</a> | 01/19/2013, KyivPy #9
+        </p>
+        <p>
+            <a href="kharkivpy%236/index.html">Lazy evaluation and declarative approach in Python</a> | <a
+                href="https://github.com/kachayev/talks/raw/master/kharkivpy%236/Kachayev_Lazy_evaluation_in_Python.pdf">PDF</a>
+            | 12/08/2012, KharkivPy #6
+        </p>
+        <p>
+            <a href="uapycon2012/index.html">Functional programming with Python</a> | <a
+                href="https://github.com/kachayev/talks/raw/master/uapycon2012/Kachayev_Functional_Programming_with_Python.pdf">PDF</a>
+            | 10/20/2012, Kyiv, PyCon UA 2012
+        </p>
+
+        <hr />
+
+        <div class="footer">
+
+            <p>
+                Oleksii Kachaiev (c) 2012-2020
+            </p>
+            <p>
+                @<a href="http://github.com/kachayev">github</a> | @<a href="http://twitter.com/kachayev">twitter</a> |
+                mail: kachayev <$> gmail dot com
+            </p>
+
+        </div>
 
     </div>
 
     <script type="text/javascript">
 
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-37811999-1']);
-      _gaq.push(['_trackPageview']);
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-37811999-1']);
+        _gaq.push(['_trackPageview']);
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
 
     </script>
 </body>
+
 </html>
