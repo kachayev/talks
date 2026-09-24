@@ -1,318 +1,335 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <title>Oleksii Kachaiev</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Oleksii Kachaiev — research in probability, statistical learning, dynamical systems, and research engineering.">
+  <title>Oleksii Kachaiev — Research &amp; Engineering</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #faf9f5;
+      --ink: #202522;
+      --muted: #5b6562;
+      --rule: #d9ded8;
+      --link: #245570;
+      --link-hover: #12394f;
+      --wash: #f0f3f2;
+      --note: #eff4f9;
+      --note-rule: #316894;
+      --tag: #e9eeeb;
+    }
 
-    <link rel='stylesheet' id='googleFonts-css'
-        href='https://fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C700italic%2C400%2C300%2C700%2C800&#038;ver=4.9.5'
-        type='text/css' media='all' />
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: .16em; }
+    a:hover { color: var(--link-hover); text-decoration-thickness: 2px; }
+    a:focus-visible { outline: 2px solid var(--note-rule); outline-offset: 4px; border-radius: 2px; }
+    ::selection { background: #d3e5f0; color: var(--ink); }
 
+    .skip-link {
+      position: absolute;
+      top: -4rem;
+      left: 1rem;
+      padding: .4rem .7rem;
+      background: var(--ink);
+      color: white;
+      z-index: 10;
+    }
+    .skip-link:focus { top: .5rem; }
+    .page { width: min(100% - 3rem, 850px); margin-inline: auto; }
+    .site-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 1.7rem 0 .8rem;
+      border-bottom: 1px solid var(--rule);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: .77rem;
+      letter-spacing: .035em;
+    }
+    .site-nav .monogram { color: var(--ink); font-weight: 720; text-decoration: none; letter-spacing: .12em; }
+    .site-nav ul { display: flex; flex-wrap: wrap; gap: .5rem 1.55rem; list-style: none; margin: 0; padding: 0; }
+    .site-nav li a { color: var(--muted); text-decoration: none; }
+    .site-nav li a:hover { color: var(--link); text-decoration: underline; text-underline-offset: .25em; }
 
-    <style>
-        body {
-            font-size: 16px;
-            font-family: 'Open Sans', sans-serif;
-            color: #5F5C52;
-        }
+    header { padding: 4.5rem 0 3rem; }
+    .eyebrow, .section-kicker, .kind, .year, .resource-links, .socials, .project-type, footer {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .eyebrow, .section-kicker {
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 650;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin: .4rem 0 .7rem;
+      font-size: clamp(2.65rem, 7.2vw, 4.4rem);
+      font-weight: 500;
+      letter-spacing: -.045em;
+      line-height: 1.06;
+      text-wrap: balance;
+    }
+    .affiliation { max-width: 44rem; color: var(--muted); font-size: 1rem; line-height: 1.6; }
+    .socials { display: flex; flex-wrap: wrap; gap: .5rem 1.45rem; margin-top: 1.65rem; font-size: .87rem; }
+    .socials a { font-weight: 600; }
+    main { padding-bottom: 3rem; }
+    section { scroll-margin-top: 2.5rem; }
+    .intro { padding: 0 0 2.9rem; }
+    .intro h2, .section-heading h2 {
+      margin: .22rem 0 1rem;
+      font-size: clamp(1.9rem, 4vw, 2.55rem);
+      font-weight: 500;
+      letter-spacing: -.035em;
+      line-height: 1.2;
+    }
+    .intro p { max-width: 43rem; margin-bottom: .95rem; }
+    .intro p:last-child { margin-bottom: 0; }
+    .ukraine-note {
+      margin: .15rem 0 5rem;
+      padding: 1.3rem 1.55rem 1.35rem;
+      border-left: 3px solid var(--note-rule);
+      background: var(--note);
+    }
+    .ukraine-note .section-kicker { color: var(--link); }
+    .ukraine-note p { max-width: 43rem; margin: .45rem 0 0; }
+    .ukraine-note .support { margin-top: .9rem; font-family: ui-sans-serif, system-ui, sans-serif; font-size: .9rem; font-weight: 650; }
 
-        a {
-            color: #3AB8E6;
-            font-weight: bold;
-        }
+    .section-heading { margin-bottom: 1.6rem; padding-top: 1rem; border-top: 1px solid var(--ink); }
+    .section-heading p { margin: -.25rem 0 0; color: var(--muted); font-size: .98rem; }
+    .publications { list-style: none; margin: 0; padding: 0; }
+    .publication {
+      display: grid;
+      grid-template-columns: 4.1rem minmax(0, 1fr);
+      gap: 1.1rem;
+      padding: 1.75rem 0 1.85rem;
+      border-top: 1px solid var(--rule);
+    }
+    .publication:first-child { border-top: 0; padding-top: .35rem; }
+    .year { padding-top: .16rem; color: var(--muted); font-size: .8rem; font-weight: 600; letter-spacing: .03em; }
+    .meta { display: flex; align-items: center; flex-wrap: wrap; gap: .38rem .8rem; margin-bottom: .6rem; }
+    .kind {
+      display: inline-block;
+      padding: .18rem .48rem;
+      background: var(--tag);
+      color: #344842;
+      border-radius: 2px;
+      font-size: .69rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      line-height: 1.45;
+      text-transform: uppercase;
+    }
+    .topic { color: var(--muted); font-family: ui-sans-serif, system-ui, sans-serif; font-size: .77rem; }
+    .publication h3 { max-width: 43rem; margin: 0 0 .38rem; font-size: 1.35rem; font-weight: 500; letter-spacing: -.014em; line-height: 1.32; }
+    .publication h3 a, .project h3 a { color: var(--ink); text-decoration: none; }
+    .publication h3 a:hover, .project h3 a:hover { color: var(--link); text-decoration: underline; text-underline-offset: .16em; }
+    .authors { max-width: 44rem; margin: 0 0 .5rem; color: var(--muted); font-size: .92rem; line-height: 1.5; }
+    .authors strong { color: var(--ink); font-weight: 600; }
+    .description { max-width: 43rem; margin: 0 0 .7rem; font-size: .95rem; line-height: 1.58; }
+    .resource-links { display: flex; flex-wrap: wrap; gap: .45rem 1rem; font-size: .76rem; font-weight: 650; }
+    .resource-links span { color: var(--muted); font-weight: 500; }
 
-        a:hover {
-            color: #2A7692;
-        }
+    #engineering { margin-top: 3.2rem; }
+    .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.8rem; list-style: none; margin: 0; padding: 0; }
+    .project { padding: 1.35rem 0 1.55rem; border-top: 1px solid var(--rule); }
+    .project-type { display: block; margin-bottom: .55rem; color: var(--muted); font-size: .7rem; font-weight: 650; letter-spacing: .095em; line-height: 1.45; text-transform: uppercase; }
+    .project h3 { margin: 0 0 .42rem; font-size: 1.27rem; font-weight: 500; letter-spacing: -.02em; line-height: 1.3; }
+    .project p { margin: 0 0 .65rem; font-size: .93rem; line-height: 1.57; }
 
-        h1 {
-            font-size: 44px;
-            margin-top: 28px;
-            margin-bottom: 28px;
-        }
+    #contact { margin-top: 3.7rem; padding: 1.3rem 0 2rem; border-top: 1px solid var(--ink); }
+    #contact h2 { margin: .18rem 0 .45rem; font-size: 1.7rem; font-weight: 500; letter-spacing: -.02em; }
+    #contact p { margin: 0; }
+    footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem 1rem; padding: 1.2rem 0 2.5rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .73rem; }
 
-        h3 {
-            font-size: 22px;
-            margin-top: 48px;
-            margin-bottom: 28px;
-        }
-
-        h4 {
-            margin-top: 24px;
-        }
-
-        .wrapper {
-            margin-left: 8%;
-            margin-right: 8%;
-            margin-top: 6%;
-        }
-
-        .footer {
-            margin-top: 44px;
-            margin-bottom: 44px;
-        }
-    </style>
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      .page { width: min(100% - 2.2rem, 850px); }
+      .site-nav { align-items: flex-start; flex-direction: column; gap: .65rem; padding-top: 1.15rem; }
+      .site-nav ul { gap: .35rem 1rem; }
+      header { padding: 3.25rem 0 2.7rem; }
+      .ukraine-note { margin-bottom: 4.2rem; padding: 1.1rem 1.15rem; }
+      .publication { grid-template-columns: 1fr; gap: .1rem; padding: 1.45rem 0; }
+      .publication h3 { font-size: 1.22rem; }
+      .projects { grid-template-columns: 1fr; }
+      #engineering { margin-top: 2.5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media print {
+      :root { --paper: #fff; --ink: #000; --muted: #333; --rule: #bbb; --note: #fff; }
+      body { font-size: 11pt; }
+      .page { width: 100%; max-width: none; }
+      .site-nav, .skip-link { display: none; }
+      header { padding-top: 0; }
+      a { color: inherit; }
+      .publication, .project, .ukraine-note { break-inside: avoid; }
+    }
+  </style>
 </head>
-
 <body>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="page">
+    <nav class="site-nav" aria-label="Page sections">
+      <a class="monogram" href="#top" aria-label="Oleksii Kachaiev, back to top">OK /</a>
+      <ul>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#engineering">Engineering</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
 
-    <div class="wrapper">
+    <header id="top">
+      <div class="eyebrow">Applied mathematics · Machine learning</div>
+      <h1>Oleksii Kachaiev</h1>
+      <p class="affiliation">MaLGa center, Dipartimento di Matematica<br>Università degli Studi di Genova · Genoa, Italy</p>
+      <div class="socials" aria-label="Profiles">
+        <a href="https://scholar.google.com/citations?user=kvOpPEkAAAAJ&amp;hl=en">Google Scholar ↗</a>
+        <a href="https://github.com/kachayev">GitHub ↗</a>
+      </div>
+    </header>
 
-        <h1>Oleksii Kachaiev</h1>
+    <main id="content">
+      <section class="intro" id="research" aria-labelledby="research-title">
+        <div class="section-kicker">01 / Research</div>
+        <h2 id="research-title">Learning from evolving systems.</h2>
+        <p>I study dynamical systems through probability and statistical learning. My recent work has focused on two related questions: what can we learn about a system from a single observed trajectory, and what can we say about its behavior over long time horizons? The first concerns learning and prediction from dependent data; the second includes quantitative bounds for the convergence of occupation measures toward invariant distributions. I use tools from Markov chains, concentration inequalities, kernel methods, and operator theory. I am also interested in applying ideas and tools from dynamical systems to optimization, flows, and optimal transport.</p>
+        <p>Previously, I was a Principal Software Engineer at Riot Games, serving as tech lead of the AI/ML team working on <em>League of Legends</em>.</p>
+      </section>
 
-        <p>Principal Software Engineer @ Riot Games, Inc.</p>
+      <aside class="ukraine-note" aria-label="A note on Ukraine">
+        <div class="section-kicker">On Ukraine 🇺🇦</div>
+        <p>First and foremost, I’m Ukrainian. On 24 February 2022, Russia launched its full-scale invasion of Ukraine. Ukrainians continue to defend our country and our freedom. We remain strong in the face of ongoing aggression. The empire will fall.</p>
+        <p class="support">Meanwhile, please consider supporting our fight for freedom through <a href="https://savelife.in.ua/en/">Come Back Alive ↗</a>.</p>
+      </aside>
 
-        <p style="background: antiquewhite;padding: 25px;">
-            First and foremost, I'm Ukrainian 🇺🇦.
-            <br />
-            On February 24, russia conducted an act of aggression by launching full-scale military invasion of Ukraine.
-            <br />
-            To whom it may concern: <a href="https://twitter.com/kachayev/status/1498735985064095754">my personal statement</a>.
-            <br />
-        </p>
-        
-        <p>
-            I work on ML/AI for League of Legends.
-            <br />
-            <br />
-            My research interests are in the modeling of agents capable of acquiring a <b>variety</b> of skills
-            <br />
-            in <b>open-ended</b> simulations, particularly in the direction of building <b>biologically inspired world models</b>.
-            <br />
-            <br />
-            Previously put a lot of time and effort into Big Data infrastructure (including contributions to Spark),
-            <br />
-            network <b>protocols</b> (including MQTT, HTTP/2, and QUIC), <b>async</b> programming runtimes,
-            <br />
-            <b>dependent types</b>, <b>symbolic PLs</b> and <b>graph rewriting</b> systems.
-            <br />
-        </p>
-
-        <h3>Research Engineering</h3>
-
-        <div>
-            <h4><a href="https://github.com/kachayev/gym-microrts-paper-sb3" target="_blank">Gym-μRTS with Stable-Baselines3/PyTorch</a></h4>
-            <p>Results from "Gym-μRTS: Toward Affordable Deep Reinforcement Learning Research in Real-time Strategy Games"paper reproduced with Stable-Baselines3.</p>
+      <section id="publications" aria-labelledby="publications-title">
+        <div class="section-heading">
+          <div class="section-kicker">02 / Publications &amp; preprints</div>
+          <h2 id="publications-title">Selected writing.</h2>
+          <p>Research papers on probability, learning, control, and distributions.</p>
         </div>
+        <ol class="publications">
+          <li class="publication">
+            <div class="year"><time datetime="2026">2026</time></div>
+            <article>
+              <div class="meta"><span class="kind">Preprint</span><span class="topic">Probability · Concentration</span></div>
+              <h3><a href="https://arxiv.org/abs/2609.23098">A short operator proof of Hoeffding inequalities for Markov chains</a></h3>
+              <p class="authors"><strong>Oleksii Kachaiev</strong></p>
+              <p class="description">A direct operator proof of sharp Hoeffding bounds for Markov chains with an L² spectral gap, extending the same argument to Markov-dependent random matrices.</p>
+              <div class="resource-links"><span>arXiv:2609.23098</span><a href="https://arxiv.org/pdf/2609.23098">PDF ↗</a></div>
+            </article>
+          </li>
+          <li class="publication">
+            <div class="year"><time datetime="2026">2026</time></div>
+            <article>
+              <div class="meta"><span class="kind">Preprint</span><span class="topic">Control · Koopman operators</span></div>
+              <h3><a href="https://arxiv.org/abs/2607.11344">Learning to control switching nonlinear systems with Koopman operator regression</a></h3>
+              <p class="authors">Edoardo Caldarelli, <strong>Oleksii Kachaiev</strong>, Cesare Molinari, Lorenzo Rosasco</p>
+              <p class="description">Learns a switching predictive model for nonlinear dynamics from data, then uses it in model predictive control, with bounds for learning error and control performance.</p>
+              <div class="resource-links"><span>arXiv:2607.11344</span><a href="https://arxiv.org/pdf/2607.11344">PDF ↗</a></div>
+            </article>
+          </li>
+          <li class="publication">
+            <div class="year"><time datetime="2026">2026</time></div>
+            <article>
+              <div class="meta"><span class="kind">Preprint</span><span class="topic">Statistical learning · Dynamics</span></div>
+              <h3><a href="https://arxiv.org/abs/2607.22399">Learning Ergodic Dynamical Systems from a Finite Trajectory</a></h3>
+              <p class="authors"><strong>Oleksii Kachaiev</strong>, Silvia Villa, Lorenzo Rosasco</p>
+              <p class="description">Studies learning from one dependent trajectory, giving guarantees for prediction and extensions to higher-order systems, finite-state dynamics, and Koopman operators.</p>
+              <div class="resource-links"><span>arXiv:2607.22399</span><a href="https://arxiv.org/pdf/2607.22399">PDF ↗</a></div>
+            </article>
+          </li>
+          <li class="publication">
+            <div class="year"><time datetime="2025">2025</time></div>
+            <article>
+              <div class="meta"><span class="kind">TMLR</span><span class="topic">Domain adaptation · Benchmarking</span></div>
+              <h3><a href="https://arxiv.org/abs/2407.11676">SKADA-Bench: Benchmarking Unsupervised Domain Adaptation Methods with Realistic Validation On Diverse Modalities</a></h3>
+              <p class="authors">Yanis Lalou, Théo Gnassounou, Antoine Collas, Antoine de Mathelin, <strong>Oleksii Kachaiev</strong>, Ambroise Odonnat, Alexandre Gramfort, Thomas Moreau, Rémi Flamary</p>
+              <p class="description">A reproducible benchmark for unsupervised domain adaptation across images, text, biomedical, and tabular data, with particular attention to realistic model selection.</p>
+              <div class="resource-links"><span>arXiv:2407.11676</span><a href="https://github.com/scikit-adaptation/skada-bench">Code ↗</a></div>
+            </article>
+          </li>
+          <li class="publication">
+            <div class="year"><time datetime="2024">2024</time></div>
+            <article>
+              <div class="meta"><span class="kind">NeurIPS 2024</span><span class="topic">Kernel methods · Distribution learning</span></div>
+              <h3><a href="https://proceedings.neurips.cc/paper_files/paper/2024/hash/4ee22ead36c9625396e353a6a9fca822-Abstract-Conference.html">Learning to Embed Distributions via Maximum Kernel Entropy</a></h3>
+              <p class="authors"><strong>Oleksii Kachaiev</strong>, Stefano Recanatesi</p>
+              <p class="description">Learns a data-dependent kernel between probability distributions by maximizing entropy in an embedding space, yielding useful geometry for downstream tasks.</p>
+              <div class="resource-links"><a href="https://proceedings.neurips.cc/paper_files/paper/2024/file/4ee22ead36c9625396e353a6a9fca822-Paper-Conference.pdf">PDF ↗</a></div>
+            </article>
+          </li>
+        </ol>
+      </section>
 
-        <div>
-            <h4><a href="https://github.com/kachayev/car-racing-attention-agent" target="_blank">Neuroevolution of Self-Interpretable Agents</a></h4>
-            <p>Consice reimpelemntation of the agent and the training procedure from the "Neuroevolution of Self-Interpretable Agents" paper.</p>
+      <section id="engineering" aria-labelledby="engineering-title">
+        <div class="section-heading">
+          <div class="section-kicker">03 / Research engineering</div>
+          <h2 id="engineering-title">Tools &amp; experiments.</h2>
+          <p>Selected open-source work at the intersection of machine learning, reinforcement learning, and reproducibility.</p>
         </div>
+        <ul class="projects">
+          <li class="project">
+            <article>
+              <span class="project-type">Python · Domain adaptation</span>
+              <h3><a href="https://scikit-adaptation.github.io/">SKADA ↗</a></h3>
+              <p>A scikit-learn and PyTorch-compatible library for domain adaptation, with estimators, pipelines, and tools for evaluating methods under distribution shift.</p>
+              <div class="resource-links"><a href="https://github.com/scikit-adaptation/skada">Source ↗</a></div>
+            </article>
+          </li>
+          <li class="project">
+            <article>
+              <span class="project-type">Python · Learning environments</span>
+              <h3><a href="https://github.com/kachayev/pyage2">PyAge2 ↗</a></h3>
+              <p>An OpenAI Gym-compatible research environment for <em>Age of Empires II</em>, exposing game observations and actions for reinforcement learning agents.</p>
+            </article>
+          </li>
+          <li class="project">
+            <article>
+              <span class="project-type">Python · Reinforcement learning</span>
+              <h3><a href="https://github.com/kachayev/gym-microrts-paper-sb3">Gym-μRTS with Stable-Baselines3 ↗</a></h3>
+              <p>A reproduction of a PPO agent for the μRTS strategy game using Stable-Baselines3, including training, evaluation, and profiling scripts.</p>
+            </article>
+          </li>
+          <li class="project">
+            <article>
+              <span class="project-type">PyTorch · Neuroevolution</span>
+              <h3><a href="https://github.com/kachayev/car-racing-attention-agent">Self-interpretable car-racing agent ↗</a></h3>
+              <p>A compact reproduction of an attention-based driving agent, trained with covariance matrix adaptation evolution strategy on the CarRacing environment.</p>
+            </article>
+          </li>
+          <li class="project">
+            <article>
+              <span class="project-type">PyTorch · Self-supervised learning</span>
+              <h3><a href="https://github.com/kachayev/ssl-in-one-epoch">SSL in One Epoch ↗</a></h3>
+              <p>A streamlined reproduction of EMP-SSL, with attention to reproducible training and efficient use of GPU memory for fast experiments.</p>
+            </article>
+          </li>
+        </ul>
+      </section>
 
-        <div>
-            <h4><a href="https://github.com/kachayev/pyage2" target="_blank">PyAge2</a></h4>
-            <p>"Age of Empires II" Learning Environment compatible with OpenAI Gym API.</p>
-        </div>
+      <section id="contact" aria-labelledby="contact-title">
+        <div class="section-kicker">04 / Contact</div>
+        <h2 id="contact-title">Get in touch.</h2>
+        <p>Email: <a href="mailto:oleksii.kachaiev@gmail.com">oleksii.kachaiev@gmail.com</a></p>
+      </section>
+    </main>
 
-        <div>
-            <h4><a href="https://github.com/kachayev/dataclasses-tensor" target="_blank">dataclasses-tensor</a></h4>
-            <p>Easily serialize dataclasses to and from tensors (PyTorch tensors or NumPy ndarrays).</p>
-        </div>
-
-        <div>
-            <h4><a href="https://github.com/kachayev/timely0" target="_blank">timely0</a></h4>
-            <p>Minimalistic implementation of Naiad paper "A Timely Dataflow System" in Scala.</p>
-        </div>
-        
-        <div>
-            <h4>Other Contributions</h4>
-            Among other contributions: RTS game learning environemnt <a href="https://github.com/vwxyzjn/gym-microrts/pulls?q=author%3Akachayev+">MicroRTS</a>,
-            RL framework <a href="https://github.com/DLR-RM/stable-baselines3/issues?q=author%3Akachayev">stable-baselines3</a>, ML framework for timeseries datasets <a href="https://github.com/alan-turing-institute/sktime/issues?q=author%3Akachayev">sktime</a>,
-            and more.
-        </div>
-        
-        <h3>Other Projects</h3>
-
-        <div>
-            <h4><a href="https://github.com/kachayev/quiche4j" target="_blank">Quiche4j</a></h4>
-            <p>QUIC transport protocol and HTTP/3 for Java</p>
-        </div>
-
-        <div>
-            <h4><a href="https://github.com/ztellman/aleph" target="_blank">aleph</a> (active contributor)</h4>
-            <p>Asynchronous communication for Clojure.</p>
-        </div>
-
-        <div>
-            <h4><a href="https://github.com/kachayev/camille-sql" target="_blank">camille-sql</a></h4>
-            <p>Run SQL queries over your Maven artifacts cache.</p>
-        </div>
-
-        <div>
-            <h4><a href="https://github.com/kachayev/nasus" target="_blank">nasus http.server</a></h4>
-            <p>A simple zero-configuration command-line HTTP files server that scales.</p>
-        </div>
-
-        <div>
-            <h4><a href="https://github.com/kachayev/muse" target="_blank">muse</a></h4>
-            <p>Clojure library that makes remote data access code elegant and efficient at the same time.</p>
-        </div>
-
-        <div>
-            <h4><a href="https://github.com/KitApps/schema-refined" target="_blank">schema-refined</a></h4>
-            <p>Clojure library to keep you away from bugs with precise schemas (refined types with runtime checks).</p>
-        </div>
-
-        <div>
-            <h4><a href="https://github.com/kachayev/fn.py" target="_blank">fn.py</a></h4>
-            <p>Functional programming in Python: implementation of missing features to enjoy FP.</p>
-        </div>
-
-        <h3>Essays</h3>
-
-        <p>
-            <a href="https://gist.github.com/kachayev/9911710758b56477e7423b5bd8dad144">Aleph, Async, HTTP, Clojure</a>
-            | 01/26/2019
-        </p>
-
-        <p>
-            <a href="http://goo.gl/JNFSPB">Go: Channels Are Not Enough</a> | 09/14/2014
-        </p>
-
-        <p>
-            <a href="http://goo.gl/WDRKkT">Parsing CSS File with Monadic Parser in Clojure</a> | 08/30/2014
-        </p>
-
-        <h3>Talks</h3>
-
-        <p>
-            <a href="https://www.youtube.com/watch?v=o5FXMVeSgFI" target="_blank">30 years of Internet
-                through the lens of the HTTP protocol</a> | 04/28/2021, London Clojurians Meetup
-        </p>
-
-        <p>
-            <a href="https://speakerdeck.com/kachayev/talking-sql-to-strangers" target="_blank">Talking SQL to
-                Strangers</a> on how to create system that understands SQL language as an API | 05/29/2020
-        </p>
-
-        <p>
-            <a href="https://speakerdeck.com/kachayev/managing-data-chaos-in-the-world-of-microservices"
-                target="_blank">Managing Data Chaos in the World of Microservices</a> | 09/13/2018, StrataData '18, New
-            York
-        </p>
-
-        <p>
-            <a href="https://speakerdeck.com/kachayev/deep-http-dive-through-aleph-and-netty" target="_blank">Deep HTTP
-                Dive Through Aleph &amp; Netty Internals</a> | 07/10/2018, Clojure Tech Talk, Kyiv
-        </p>
-
-        <p>
-            <a href="https://speakerdeck.com/kachayev/keep-your-data-safe-with-refined-types" target="_blank">Keep Your
-                Data Safe With Refined Types</a> | 06/19/2018, Clojure Meetup, Kyiv
-        </p>
-
-        <p>
-            <a href="https://t.co/ak7eyqigEw">Clojure @ Attendify: Experience Report</a> | 11/14/2017, Attendify Clojure
-            Meetup, Kyiv
-        </p>
-        <p>
-            <a href="https://goo.gl/2st1ej">Finagle & Clojure</a> | 08/13/2015, FinagleCon 2015, San-Francisco
-        </p>
-        <p>
-            <a href="https://goo.gl/h4Zuvr">Efficient, Concurrent and Concise Data Access</a> | <a
-                href="https://goo.gl/masrsz">Video</a> | 06/26/2015, EuroClojure 2015, Barcelona
-        </p>
-        <p>
-            <a href="http://goo.gl/eDpSKf">Microservices in Clojure. Lessons learned</a> | 04/16/2015, Kyiv Clojure
-            Meetup #7
-        </p>
-        <p>
-            <a href="http://goo.gl/7pwjpz">Errors Handling with core.async</a> | 10/22/2014, Kyiv Clojure Meetup #4
-        </p>
-        <p>
-            <a href="http://goo.gl/HOvrg4">Deterministic Parallel and Distributed Programming with Clojure. Quick
-                Intro</a> | 07/03/2014, KievFProg #7
-        </p>
-        <p>
-            <a href="http://goo.gl/n4ylC4">Monadic Parsing in Python</a> | 06/07/2014, KyivPy #12
-        </p>
-        <p>
-            <a href="http://goo.gl/FMShPi">Fn.py: Persistent Data Structures</a> | 03/22/2014, Kharkiv.py #10
-        </p>
-        <p>
-            <a href="http://goo.gl/4onX7Y">Erlang in Production. Lessons learned</a> | 11/16/2013, KyivFProg #11
-        </p>
-        <p>
-            <a href="http://goo.gl/Jme06c">Union-based Heaps in Haskell and Python</a> | 10/26/2013, KyivPy #11
-        </p>
-        <p>
-            <a href="http://goo.gl/pQhE09">Channels &amp; Concurrency: Go, Clojure, Erlang, Scala, Haskell</a> |
-            08/03/2013, KievFProg
-        </p>
-        <p>
-            <a href="http://goo.gl/CIMS2">Real-time collaboration with Erlang and Websockets</a> | <a
-                href="http://goo.gl/HfT01">Repo</a> | <a href="http://goo.gl/CIMS2">History</a> | 06/01/2013, HotCode
-            2013
-        </p>
-        <p>
-            <a href="http://goo.gl/Fc29z">Streams as fundumental abstraction</a> | 06/01/2013, HotCode 2013
-        </p>
-        <p>
-            <a href="http://goo.gl/yqqTf">Web, Concurrency &amp; Functional Programming</a> | 05/31/2013, HotCode 2013
-        </p>
-        <p>
-            <a href="iforum2013/index.html">Functional programming for Web</a> | <a
-                href="https://github.com/kachayev/talks/blob/master/iforum2013/fp_web.pdf?raw=true">PDF</a> |
-            04/24/2013, iForum 2013
-        </p>
-        <p>
-            <a href="kyivpy%2310/index.html">Stop Coding Pascal</a> | <a
-                href="https://github.com/kachayev/talks/blob/master/kyivpy%2310/stop_coding_pascal.pdf?raw=true">PDF</a>
-            | 04/06/2013, KyivPy #10
-        </p>
-        <p>
-            <a href="kyivfprog/index.html">Fn.py: ideas and internals</a> | <a
-                href="https://github.com/kachayev/talks/raw/master/kyivfprog/Fn.py.pdf">PDF</a> | 03/27/2013, Kyiv FProg
-        </p>
-        <p>
-            <a href="kharkivpy%230/index.html#/">Modern Concurrency: Erlang, Scala, Go, Clojure</a> | <a
-                href="https://github.com/kachayev/talks/raw/master/kharkivpy%230/Kachayev_Modern_Concurrency.pdf">PDF</a>
-            | 01/26/2013, KharkivPy #0
-        </p>
-        <p>
-            <a href="kyivpy%239/index.html#/">Fn.py: enjoy FP in Python</a> | 01/19/2013, KyivPy #9
-        </p>
-        <p>
-            <a href="kharkivpy%236/index.html">Lazy evaluation and declarative approach in Python</a> | <a
-                href="https://github.com/kachayev/talks/raw/master/kharkivpy%236/Kachayev_Lazy_evaluation_in_Python.pdf">PDF</a>
-            | 12/08/2012, KharkivPy #6
-        </p>
-        <p>
-            <a href="uapycon2012/index.html">Functional programming with Python</a> | <a
-                href="https://github.com/kachayev/talks/raw/master/uapycon2012/Kachayev_Functional_Programming_with_Python.pdf">PDF</a>
-            | 10/20/2012, Kyiv, PyCon UA 2012
-        </p>
-
-        <hr />
-
-        <div class="footer">
-
-            <p>
-                Oleksii Kachaiev (c) 2012-2020
-            </p>
-            <p>
-                @<a href="http://github.com/kachayev">github</a> | @<a href="http://twitter.com/kachayev">twitter</a> |
-                mail: kachayev <$> gmail dot com
-            </p>
-
-        </div>
-
-    </div>
-
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-37811999-1']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-
-    </script>
+    <footer>© 2026–present Oleksii Kachaiev</footer>
+  </div>
 </body>
-
 </html>
